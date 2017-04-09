@@ -23,6 +23,11 @@ public class Tiposolicitud  implements java.io.Serializable {
     public Tiposolicitud(String nombre) {
         this.nombre = nombre;
     }
+    
+    public Tiposolicitud(Integer id) {
+        this.id = id;
+    }
+    
     public Tiposolicitud(String nombre, String descripcion, Set solicituds) {
        this.nombre = nombre;
        this.descripcion = descripcion;

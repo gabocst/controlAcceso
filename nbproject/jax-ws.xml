@@ -16,6 +16,9 @@
     <service name="PosicicionFuncionalPerfilWS">
       <implementation-class>cl.service.webservices.PosicicionFuncionalPerfilWS</implementation-class>
     </service>
+    <service name="SolicitudWS">
+      <implementation-class>cl.service.webservices.SolicitudWS</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

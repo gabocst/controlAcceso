@@ -99,12 +99,7 @@ public class PerfilDAO {
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
             Perfil perfil = (Perfil)session.get(Perfil.class, id);
-            if(perfil.isEstado()){
-                perfil.setEstado(false);
-            }
-            else{
-                perfil.setEstado(true);
-            }
+            perfil.setEstado(!perfil.isEstado());
             tx = session.beginTransaction();
             session.update(perfil);
             tx.commit();   

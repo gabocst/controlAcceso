@@ -49,6 +49,16 @@ public class Solicitud  implements java.io.Serializable {
        this.idIntermediario = idIntermediario;
        this.matrizcontrolaccesos = matrizcontrolaccesos;
     }
+    
+    public Solicitud(Posicionfuncional posicionfuncional, Tiposolicitud tiposolicitud, int idSolicitante, Date fechaCreacion, String razon, String estadoSolicitud, Integer idIntermediario) {
+       this.posicionfuncional = posicionfuncional;
+       this.tiposolicitud = tiposolicitud;
+       this.idSolicitante = idSolicitante;
+       this.fechaCreacion = fechaCreacion;
+       this.razon = razon;
+       this.estadoSolicitud = estadoSolicitud;
+       this.idIntermediario = idIntermediario;
+    }
    
     public Integer getId() {
         return this.id;

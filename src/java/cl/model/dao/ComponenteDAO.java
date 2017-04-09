@@ -92,12 +92,7 @@ public class ComponenteDAO {
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
             Componente compo = (Componente)session.get(Componente.class, id);
-            if(compo.isEstado()){
-                compo.setEstado(false);
-            }
-            else{
-                compo.setEstado(true);
-            }
+            compo.setEstado(!compo.isEstado());
             tx = session.beginTransaction();
             session.update(compo);
             tx.commit();   

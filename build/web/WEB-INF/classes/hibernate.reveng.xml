@@ -48,7 +48,5 @@ Contributor(s):
   <table-filter match-name="solicitud"/>
   <table-filter match-name="posicionfuncional"/>
   <table-filter match-name="matrizcontrolacceso"/>
-  <table-filter match-name="estadosolicitud"/>
   <table-filter match-name="posicionfuncionalperfil"/>
-  <table-filter match-name="estado"/>
 </hibernate-reverse-engineering>
