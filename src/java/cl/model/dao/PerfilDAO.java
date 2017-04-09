@@ -6,7 +6,6 @@
 package cl.model.dao;
 
 import cl.model.dto.PerfilDTO;
-import cl.model.pojos.Estado;
 import cl.model.pojos.Perfil;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +77,7 @@ public class PerfilDAO {
             session = sf.openSession();
             Perfil perfil = (Perfil)session.get(Perfil.class, p.getId());
             perfil.setNombre(p.getNombre());
-            perfil.setEstado(p.getEstado());
+            perfil.setEstado(p.isEstado());
             tx = session.beginTransaction();
             session.update(perfil);
             tx.commit();   
@@ -100,14 +99,12 @@ public class PerfilDAO {
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
             Perfil perfil = (Perfil)session.get(Perfil.class, id);
-            Estado e = new Estado();
-            if(perfil.getEstado().getNombre().equals("Activo")){
-                e.setId(0);
+            if(perfil.isEstado()){
+                perfil.setEstado(false);
             }
             else{
-                e.setId(1);
+                perfil.setEstado(true);
             }
-            perfil.setEstado(e);
             tx = session.beginTransaction();
             session.update(perfil);
             tx.commit();   

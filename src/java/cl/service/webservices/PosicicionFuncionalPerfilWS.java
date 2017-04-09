@@ -7,7 +7,6 @@ package cl.service.webservices;
 
 import cl.model.dao.PosicionFuncionalPerfilDAO;
 import cl.model.dto.PosicionFuncionalPerfilDTO;
-import cl.model.pojos.Estado;
 import cl.model.pojos.Perfil;
 import cl.model.pojos.Posicionfuncional;
 import cl.model.pojos.Posicionfuncionalperfil;
@@ -28,13 +27,12 @@ public class PosicicionFuncionalPerfilWS {
      * Web service operation
      */
     @WebMethod(operationName = "crearPosicionFuncionalPerfil")
-    public String crearPosicionFuncionalPerfil(@WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "idPosicionFuncional") int idPosicionFuncional, @WebParam(name = "idPerfil") int idPerfil, @WebParam(name = "idEstado") int idEstado) {
+    public String crearPosicionFuncionalPerfil(@WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "idPosicionFuncional") int idPosicionFuncional, @WebParam(name = "idPerfil") int idPerfil, @WebParam(name = "estado") boolean estado) {
         
         Date date = new Date();
         Perfil p = new Perfil(idPerfil);
         Posicionfuncional pf = new Posicionfuncional(idPosicionFuncional);
-        Estado e = new Estado(idEstado);
-        Posicionfuncionalperfil pfp = new Posicionfuncionalperfil(e, p, pf, date, creadoPor);
+        Posicionfuncionalperfil pfp = new Posicionfuncionalperfil(p, pf, date, creadoPor, estado);
         PosicionFuncionalPerfilDAO pfpDAO = new PosicionFuncionalPerfilDAO();
         return pfpDAO.crearPosicionPerfil(pfp);
     }

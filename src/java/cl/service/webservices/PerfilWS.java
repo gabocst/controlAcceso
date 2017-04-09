@@ -8,7 +8,6 @@ package cl.service.webservices;
 import cl.model.dao.PerfilDAO;
 import cl.model.dto.PerfilDTO;
 import cl.model.pojos.Componente;
-import cl.model.pojos.Estado;
 import cl.model.pojos.Perfil;
 import java.util.Date;
 import java.util.List;
@@ -29,12 +28,11 @@ public class PerfilWS {
      * Web service operation
      */
     @WebMethod(operationName = "crearPerfil")
-    public String crearPerfil(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "idComponente") int idComponente, @WebParam(name = "idEstado") int idEstado) {
+    public String crearPerfil(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "idComponente") int idComponente, @WebParam(name = "estado") boolean estado) {
         
         Date date = new Date();
         Componente c = new Componente(idComponente);
-        Estado e = new Estado(idEstado);
-        Perfil p = new Perfil(c, e, nombre, date, creadoPor);
+        Perfil p = new Perfil(c, nombre, date, creadoPor, estado);
         PerfilDAO perfilDAO = new PerfilDAO();
         return perfilDAO.crearPerfil(p);
         
@@ -69,13 +67,12 @@ public class PerfilWS {
      * Web service operation
      */
     @WebMethod(operationName = "actualizarPerfil")
-    public String actualizarPerfil(@WebParam(name = "id") Integer id,@WebParam(name = "nombre") String nombre, @WebParam(name = "idEstado") int idEstado) {
+    public String actualizarPerfil(@WebParam(name = "id") Integer id,@WebParam(name = "nombre") String nombre, @WebParam(name = "estado") boolean estado) {
         
-        Estado e = new Estado(idEstado);
         PerfilDAO perfilDAO = new PerfilDAO();
         Perfil p = perfilDAO.leerPerfil(id);
         p.setNombre(nombre);
-        p.setEstado(e);
+        p.setEstado(estado);
         return perfilDAO.actualizarPerfil(p);
         
     }

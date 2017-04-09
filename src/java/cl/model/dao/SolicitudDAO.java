@@ -32,7 +32,7 @@ public class SolicitudDAO {
                 Query aa = session.createQuery("from Matrizcontrolacceso m, Estadosolicitud e\n" +
                                                             "WHERE m.idEstadoSolicitud = e.id\n" +
                                                             "AND e.nombre = 'Activo'\n" +
-                                                            "AND m.idUsuario = " + s.getSolicitante());
+                                                            "AND m.idUsuario = " + s.getIdSolicitante());
                 List<Matrizcontrolacceso> accesos_activos = aa.list();
                 int mcaLen = accesos_activos.size();  
                 if(mcaLen > 0){

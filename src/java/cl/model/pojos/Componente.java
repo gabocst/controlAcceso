@@ -23,6 +23,9 @@ public class Componente  implements java.io.Serializable {
     public Componente() {
     }
 
+    public Componente(Integer id) {
+        this.id = id;
+    }
 	
     public Componente(String nombre, Date fechaCreacion, String creadoPor, boolean estado) {
         this.nombre = nombre;

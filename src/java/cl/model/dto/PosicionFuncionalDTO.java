@@ -18,9 +18,8 @@ public class PosicionFuncionalDTO {
     private String nombre;
     private Date fechaCreacion;
     private String creadoPor;
-    private Integer idEstado;
     private Integer idUnidadorganizacional;
-    private String estado;
+    private boolean estado;
     private String unidadorganizacional;
     
     
@@ -33,9 +32,8 @@ public class PosicionFuncionalDTO {
         this.nombre = p.getNombre();
         this.fechaCreacion = p.getFechaCreacion();
         this.creadoPor = p.getCreadoPor();
-        this.idEstado = p.getEstado().getId();
         this.idUnidadorganizacional = p.getUnidadorganizacional().getId();
-        this.estado = p.getEstado().getNombre();
+        this.estado = p.isEstado();
         this.unidadorganizacional = p.getUnidadorganizacional().getNombre();
     }
     /**
@@ -95,20 +93,6 @@ public class PosicionFuncionalDTO {
     }
 
     /**
-     * @return the idEstado
-     */
-    public Integer getIdEstado() {
-        return idEstado;
-    }
-
-    /**
-     * @param idEstado the idEstado to set
-     */
-    public void setIdEstado(Integer idEstado) {
-        this.idEstado = idEstado;
-    }
-
-    /**
      * @return the idUnidadorganizacional
      */
     public Integer getIdUnidadorganizacional() {
@@ -123,20 +107,6 @@ public class PosicionFuncionalDTO {
     }
 
     /**
-     * @return the estado
-     */
-    public String getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    /**
      * @return the unidadorganizacional
      */
     public String getUnidadorganizacional() {
@@ -148,6 +118,20 @@ public class PosicionFuncionalDTO {
      */
     public void setUnidadorganizacional(String unidadorganizacional) {
         this.unidadorganizacional = unidadorganizacional;
+    }
+
+    /**
+     * @return the estado
+     */
+    public boolean isEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
 }

@@ -8,7 +8,6 @@ package cl.service.webservices;
 import cl.model.pojos.Componente;
 import cl.model.dao.ComponenteDAO;
 import cl.model.dto.ComponenteDTO;
-import cl.model.pojos.Estado;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -31,7 +30,7 @@ public class ComponenteWS {
      * Web service operation
      */
     @WebMethod(operationName = "crearComponente")
-    public String crearComponente(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "idEstado") boolean estado) {
+    public String crearComponente(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "estado") boolean estado) {
 
         Date date = new Date();
 
@@ -71,7 +70,7 @@ public class ComponenteWS {
      * Web service operation
      */
     @WebMethod(operationName = "actualizarComponente")
-    public String actualizarComponente(@WebParam(name = "id") Integer id, @WebParam(name = "nombre") String nombre, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "idEstado") boolean estado) {
+    public String actualizarComponente(@WebParam(name = "id") Integer id, @WebParam(name = "nombre") String nombre, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "estado") boolean estado) {
         ComponenteDAO componenteDAO = new ComponenteDAO();
         Componente c = componenteDAO.leerComponente(id);
         c.setDescripcion(descripcion);

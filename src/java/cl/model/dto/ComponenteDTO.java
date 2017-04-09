@@ -14,31 +14,17 @@ import java.util.Date;
  */
 public class ComponenteDTO {
 
-    /**
-     * @return the idEstado
-     */
-    public Integer getIdEstado() {
-        return idEstado;
-    }
-
-    /**
-     * @param idEstado the idEstado to set
-     */
-    public void setIdEstado(Integer idEstado) {
-        this.idEstado = idEstado;
-    }
     private Integer id;
     private String nombre;
     private Date fechaCreacion;
     private String creadoPor;
     private String descripcion;
-    private String estado;
-    private Integer idEstado;
+    private boolean estado;
     
     public ComponenteDTO() {
     }
     
-    public ComponenteDTO(Integer id, String nombre, Date fechaCreacion, String creadoPor, String descripcion, String estado) {
+    public ComponenteDTO(Integer id, String nombre, Date fechaCreacion, String creadoPor, String descripcion, boolean estado) {
        this.id = id;
        this.estado = estado;
        this.nombre = nombre;
@@ -49,12 +35,11 @@ public class ComponenteDTO {
     
     public ComponenteDTO(Componente c) {
        this.id = c.getId();
-       this.estado = c.getEstado().getNombre();
+       this.estado = c.isEstado();
        this.nombre = c.getNombre();
        this.fechaCreacion = c.getFechaCreacion();
        this.creadoPor = c.getCreadoPor();
        this.descripcion = c.getDescripcion();
-       this.idEstado = c.getEstado().getId();
     }
 
     /**
@@ -130,14 +115,14 @@ public class ComponenteDTO {
     /**
      * @return the estado
      */
-    public String getEstado() {
+    public boolean isEstado() {
         return estado;
     }
 
     /**
      * @param estado the estado to set
      */
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 }

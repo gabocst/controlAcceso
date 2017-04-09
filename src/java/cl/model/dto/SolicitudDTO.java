@@ -14,13 +14,12 @@ import java.util.Date;
  */
 public class SolicitudDTO {
     private Integer id;
-    private Integer idEstadoSolicitud;
     private String estadoSolicitud;
     private Integer idPosicionfuncional;
     private String posicionFuncional;
     private Integer idTipoSolicitud;
     private String tipoSolicitud;
-    private String solicitante;
+    private Integer idSolicitante;
     private Date fechaCreacion;
     private String razon;
     private String observacionAprobador;
@@ -33,13 +32,12 @@ public class SolicitudDTO {
     
     public SolicitudDTO(Solicitud s) {
         this.id = s.getId();
-        this.idEstadoSolicitud = s.getEstadosolicitud().getId();
-        this.estadoSolicitud = s.getEstadosolicitud().getNombre();
+        this.estadoSolicitud = s.getEstadoSolicitud();
         this.idPosicionfuncional = s.getPosicionfuncional().getId();
         this.posicionFuncional = s.getPosicionfuncional().getNombre();
         this.idTipoSolicitud = s.getTiposolicitud().getId();
         this.tipoSolicitud = s.getTiposolicitud().getNombre();
-        this.solicitante = s.getSolicitante();
+        this.idSolicitante = s.getIdSolicitante();
         this.fechaCreacion = s.getFechaCreacion();
         this.razon = s.getRazon();
         this.observacionAdministrador = s.getObservacionAdministrador();
@@ -60,20 +58,6 @@ public class SolicitudDTO {
      */
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * @return the idEstadoSolicitud
-     */
-    public Integer getIdEstadoSolicitud() {
-        return idEstadoSolicitud;
-    }
-
-    /**
-     * @param idEstadoSolicitud the idEstadoSolicitud to set
-     */
-    public void setIdEstadoSolicitud(Integer idEstadoSolicitud) {
-        this.idEstadoSolicitud = idEstadoSolicitud;
     }
 
     /**
@@ -144,20 +128,6 @@ public class SolicitudDTO {
      */
     public void setTipoSolicitud(String tipoSolicitud) {
         this.tipoSolicitud = tipoSolicitud;
-    }
-
-    /**
-     * @return the solicitante
-     */
-    public String getSolicitante() {
-        return solicitante;
-    }
-
-    /**
-     * @param solicitante the solicitante to set
-     */
-    public void setSolicitante(String solicitante) {
-        this.solicitante = solicitante;
     }
 
     /**
@@ -242,5 +212,19 @@ public class SolicitudDTO {
      */
     public void setIdIntermediario(Integer idIntermediario) {
         this.idIntermediario = idIntermediario;
+    }
+
+    /**
+     * @return the idSolicitante
+     */
+    public Integer getIdSolicitante() {
+        return idSolicitante;
+    }
+
+    /**
+     * @param idSolicitante the idSolicitante to set
+     */
+    public void setIdSolicitante(Integer idSolicitante) {
+        this.idSolicitante = idSolicitante;
     }
 }

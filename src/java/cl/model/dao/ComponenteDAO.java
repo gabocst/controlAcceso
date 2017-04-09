@@ -6,7 +6,6 @@
 package cl.model.dao;
 
 import cl.model.pojos.Componente;
-import cl.model.pojos.Estado;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -71,7 +70,7 @@ public class ComponenteDAO {
             Componente compo = (Componente)session.get(Componente.class, c.getId());
             compo.setDescripcion(c.getDescripcion());
             compo.setNombre(c.getNombre());
-            compo.setEstado(c.getEstado());
+            compo.setEstado(c.isEstado());
             tx = session.beginTransaction();
             session.update(compo);
             tx.commit();   
@@ -93,14 +92,12 @@ public class ComponenteDAO {
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
             Componente compo = (Componente)session.get(Componente.class, id);
-            Estado e = new Estado();
-            if(compo.getEstado().getNombre().equals("Activo")){
-                e.setId(0);
+            if(compo.isEstado()){
+                compo.setEstado(false);
             }
             else{
-                e.setId(1);
+                compo.setEstado(true);
             }
-            compo.setEstado(e);
             tx = session.beginTransaction();
             session.update(compo);
             tx.commit();   

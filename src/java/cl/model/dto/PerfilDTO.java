@@ -18,8 +18,7 @@ public class PerfilDTO {
     private Date fechaCreacion;
     private String creadoPor;
     private String componente;
-    private String estado;
-    private Integer idEstado;
+    private boolean estado;
     private Integer idComponente;
     
     public PerfilDTO() {
@@ -32,8 +31,7 @@ public class PerfilDTO {
         this.fechaCreacion = p.getFechaCreacion();
         this.creadoPor = p.getCreadoPor();
         this.componente = p.getComponente().getNombre();
-        this.estado = p.getEstado().getNombre();
-        this.idEstado = p.getEstado().getId();
+        this.estado = p.isEstado();
         this.idComponente = p.getComponente().getId();
     }
 
@@ -108,34 +106,6 @@ public class PerfilDTO {
     }
 
     /**
-     * @return the estado
-     */
-    public String getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    /**
-     * @return the idEstado
-     */
-    public Integer getIdEstado() {
-        return idEstado;
-    }
-
-    /**
-     * @param idEstado the idEstado to set
-     */
-    public void setIdEstado(Integer idEstado) {
-        this.idEstado = idEstado;
-    }
-
-    /**
      * @return the idComponente
      */
     public Integer getIdComponente() {
@@ -147,5 +117,19 @@ public class PerfilDTO {
      */
     public void setIdComponente(Integer idComponente) {
         this.idComponente = idComponente;
+    }
+
+    /**
+     * @return the estado
+     */
+    public boolean isEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 }

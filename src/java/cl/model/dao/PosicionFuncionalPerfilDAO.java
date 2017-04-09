@@ -6,7 +6,6 @@
 package cl.model.dao;
 
 import cl.model.dto.PosicionFuncionalPerfilDTO;
-import cl.model.pojos.Estado;
 import cl.model.pojos.Posicionfuncionalperfil;
 import java.util.ArrayList;
 import java.util.List;
