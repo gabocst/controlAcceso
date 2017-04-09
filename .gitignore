@@ -16,3 +16,7 @@ hs_err_pid*
 /src/java/hibernate.cfg
 /dist/
 nbproject/private/
+
+src/java/hibernate\.cfg\.xml
+
+nbproject/
