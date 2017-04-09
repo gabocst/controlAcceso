@@ -26,6 +26,7 @@ public class SolicitudDTO {
     private String observacionAprobador;
     private String observacionAdministrador;
     private String observacionVerificador;
+    private Integer idIntermediario;
     
     public SolicitudDTO() {
     }
@@ -44,6 +45,7 @@ public class SolicitudDTO {
         this.observacionAdministrador = s.getObservacionAdministrador();
         this.observacionAprobador = s.getObservacionAprobador();
         this.observacionVerificador = s.getObservacionVerificador();
+        this.idIntermediario = s.getIdIntermediario();
     }
 
     /**
@@ -226,5 +228,19 @@ public class SolicitudDTO {
      */
     public void setObservacionVerificador(String observacionVerificador) {
         this.observacionVerificador = observacionVerificador;
+    }
+
+    /**
+     * @return the idIntermediario
+     */
+    public Integer getIdIntermediario() {
+        return idIntermediario;
+    }
+
+    /**
+     * @param idIntermediario the idIntermediario to set
+     */
+    public void setIdIntermediario(Integer idIntermediario) {
+        this.idIntermediario = idIntermediario;
     }
 }

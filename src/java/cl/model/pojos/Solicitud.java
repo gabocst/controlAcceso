@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 8, 2017 9:54:33 PM by Hibernate Tools 4.3.1
+// Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -22,6 +22,7 @@ public class Solicitud  implements java.io.Serializable {
      private String observacionAprobador;
      private String observacionAdministrador;
      private String observacionVerificador;
+     private Integer idIntermediario;
      private Set matrizcontrolaccesos = new HashSet(0);
 
     public Solicitud() {
@@ -35,7 +36,7 @@ public class Solicitud  implements java.io.Serializable {
         this.solicitante = solicitante;
         this.fechaCreacion = fechaCreacion;
     }
-    public Solicitud(Estadosolicitud estadosolicitud, Posicionfuncional posicionfuncional, Tiposolicitud tiposolicitud, String solicitante, Date fechaCreacion, String razon, String observacionAprobador, String observacionAdministrador, String observacionVerificador, Set matrizcontrolaccesos) {
+    public Solicitud(Estadosolicitud estadosolicitud, Posicionfuncional posicionfuncional, Tiposolicitud tiposolicitud, String solicitante, Date fechaCreacion, String razon, String observacionAprobador, String observacionAdministrador, String observacionVerificador, Integer idIntermediario, Set matrizcontrolaccesos) {
        this.estadosolicitud = estadosolicitud;
        this.posicionfuncional = posicionfuncional;
        this.tiposolicitud = tiposolicitud;
@@ -45,6 +46,7 @@ public class Solicitud  implements java.io.Serializable {
        this.observacionAprobador = observacionAprobador;
        this.observacionAdministrador = observacionAdministrador;
        this.observacionVerificador = observacionVerificador;
+       this.idIntermediario = idIntermediario;
        this.matrizcontrolaccesos = matrizcontrolaccesos;
     }
    
@@ -117,6 +119,13 @@ public class Solicitud  implements java.io.Serializable {
     
     public void setObservacionVerificador(String observacionVerificador) {
         this.observacionVerificador = observacionVerificador;
+    }
+    public Integer getIdIntermediario() {
+        return this.idIntermediario;
+    }
+    
+    public void setIdIntermediario(Integer idIntermediario) {
+        this.idIntermediario = idIntermediario;
     }
     public Set getMatrizcontrolaccesos() {
         return this.matrizcontrolaccesos;

@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 8, 2017 9:54:33 PM by Hibernate Tools 4.3.1
+// Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -23,7 +23,7 @@ public class Estado  implements java.io.Serializable {
     public Estado() {
     }
     
-    public Estado(int id) {
+    public Estado(Integer id) {
         this.id = id;
     }
 

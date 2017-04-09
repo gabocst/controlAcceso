@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 8, 2017 9:54:34 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="cl.model.pojos.Matrizcontrolacceso" table="matrizcontrolacceso" catalog="controlacceso" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -20,8 +20,17 @@
         <property name="accion" type="string">
             <column name="accion" length="20" not-null="true" />
         </property>
+        <property name="inicio" type="timestamp">
+            <column name="inicio" length="19" />
+        </property>
+        <property name="fin" type="timestamp">
+            <column name="fin" length="19" />
+        </property>
         <property name="idEjecutor" type="java.lang.Integer">
             <column name="idEjecutor" />
+        </property>
+        <property name="idUsuario" type="int">
+            <column name="idUsuario" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>
