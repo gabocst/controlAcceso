@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1
+// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,21 +11,21 @@ public class Posicionfuncionalperfil  implements java.io.Serializable {
 
 
      private Integer id;
-     private Estado estado;
      private Perfil perfil;
      private Posicionfuncional posicionfuncional;
      private Date fechaCreacion;
      private String creadoPor;
+     private boolean estado;
 
     public Posicionfuncionalperfil() {
     }
 
-    public Posicionfuncionalperfil(Estado estado, Perfil perfil, Posicionfuncional posicionfuncional, Date fechaCreacion, String creadoPor) {
-       this.estado = estado;
+    public Posicionfuncionalperfil(Perfil perfil, Posicionfuncional posicionfuncional, Date fechaCreacion, String creadoPor, boolean estado) {
        this.perfil = perfil;
        this.posicionfuncional = posicionfuncional;
        this.fechaCreacion = fechaCreacion;
        this.creadoPor = creadoPor;
+       this.estado = estado;
     }
    
     public Integer getId() {
@@ -34,13 +34,6 @@ public class Posicionfuncionalperfil  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
-    }
-    public Estado getEstado() {
-        return this.estado;
-    }
-    
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
     public Perfil getPerfil() {
         return this.perfil;
@@ -69,6 +62,13 @@ public class Posicionfuncionalperfil  implements java.io.Serializable {
     
     public void setCreadoPor(String creadoPor) {
         this.creadoPor = creadoPor;
+    }
+    public boolean isEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 

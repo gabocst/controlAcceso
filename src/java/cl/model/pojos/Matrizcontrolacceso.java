@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1
+// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,34 +11,34 @@ public class Matrizcontrolacceso  implements java.io.Serializable {
 
 
      private Integer id;
-     private Estadosolicitud estadosolicitud;
      private Perfil perfil;
      private Solicitud solicitud;
      private String accion;
      private Date inicio;
      private Date fin;
      private Integer idEjecutor;
+     private String estadoSolicitud;
      private int idUsuario;
 
     public Matrizcontrolacceso() {
     }
 
 	
-    public Matrizcontrolacceso(Estadosolicitud estadosolicitud, Perfil perfil, Solicitud solicitud, String accion, int idUsuario) {
-        this.estadosolicitud = estadosolicitud;
+    public Matrizcontrolacceso(Perfil perfil, Solicitud solicitud, String accion, String estadoSolicitud, int idUsuario) {
         this.perfil = perfil;
         this.solicitud = solicitud;
         this.accion = accion;
+        this.estadoSolicitud = estadoSolicitud;
         this.idUsuario = idUsuario;
     }
-    public Matrizcontrolacceso(Estadosolicitud estadosolicitud, Perfil perfil, Solicitud solicitud, String accion, Date inicio, Date fin, Integer idEjecutor, int idUsuario) {
-       this.estadosolicitud = estadosolicitud;
+    public Matrizcontrolacceso(Perfil perfil, Solicitud solicitud, String accion, Date inicio, Date fin, Integer idEjecutor, String estadoSolicitud, int idUsuario) {
        this.perfil = perfil;
        this.solicitud = solicitud;
        this.accion = accion;
        this.inicio = inicio;
        this.fin = fin;
        this.idEjecutor = idEjecutor;
+       this.estadoSolicitud = estadoSolicitud;
        this.idUsuario = idUsuario;
     }
    
@@ -48,13 +48,6 @@ public class Matrizcontrolacceso  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
-    }
-    public Estadosolicitud getEstadosolicitud() {
-        return this.estadosolicitud;
-    }
-    
-    public void setEstadosolicitud(Estadosolicitud estadosolicitud) {
-        this.estadosolicitud = estadosolicitud;
     }
     public Perfil getPerfil() {
         return this.perfil;
@@ -97,6 +90,13 @@ public class Matrizcontrolacceso  implements java.io.Serializable {
     
     public void setIdEjecutor(Integer idEjecutor) {
         this.idEjecutor = idEjecutor;
+    }
+    public String getEstadoSolicitud() {
+        return this.estadoSolicitud;
+    }
+    
+    public void setEstadoSolicitud(String estadoSolicitud) {
+        this.estadoSolicitud = estadoSolicitud;
     }
     public int getIdUsuario() {
         return this.idUsuario;

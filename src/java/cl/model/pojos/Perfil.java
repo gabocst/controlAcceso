@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1
+// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -14,33 +14,30 @@ public class Perfil  implements java.io.Serializable {
 
      private Integer id;
      private Componente componente;
-     private Estado estado;
      private String nombre;
      private Date fechaCreacion;
      private String creadoPor;
+     private boolean estado;
      private Set matrizcontrolaccesos = new HashSet(0);
      private Set posicionfuncionalperfils = new HashSet(0);
 
     public Perfil() {
     }
 
-    public Perfil(Integer id) {
-        this.id = id;
-    }
 	
-    public Perfil(Componente componente, Estado estado, String nombre, Date fechaCreacion, String creadoPor) {
+    public Perfil(Componente componente, String nombre, Date fechaCreacion, String creadoPor, boolean estado) {
         this.componente = componente;
-        this.estado = estado;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.creadoPor = creadoPor;
+        this.estado = estado;
     }
-    public Perfil(Componente componente, Estado estado, String nombre, Date fechaCreacion, String creadoPor, Set matrizcontrolaccesos, Set posicionfuncionalperfils) {
+    public Perfil(Componente componente, String nombre, Date fechaCreacion, String creadoPor, boolean estado, Set matrizcontrolaccesos, Set posicionfuncionalperfils) {
        this.componente = componente;
-       this.estado = estado;
        this.nombre = nombre;
        this.fechaCreacion = fechaCreacion;
        this.creadoPor = creadoPor;
+       this.estado = estado;
        this.matrizcontrolaccesos = matrizcontrolaccesos;
        this.posicionfuncionalperfils = posicionfuncionalperfils;
     }
@@ -58,13 +55,6 @@ public class Perfil  implements java.io.Serializable {
     
     public void setComponente(Componente componente) {
         this.componente = componente;
-    }
-    public Estado getEstado() {
-        return this.estado;
-    }
-    
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
     public String getNombre() {
         return this.nombre;
@@ -86,6 +76,13 @@ public class Perfil  implements java.io.Serializable {
     
     public void setCreadoPor(String creadoPor) {
         this.creadoPor = creadoPor;
+    }
+    public boolean isEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     public Set getMatrizcontrolaccesos() {
         return this.matrizcontrolaccesos;

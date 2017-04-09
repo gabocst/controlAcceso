@@ -29,14 +29,30 @@ public class SolicitudDAO {
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
             if(s.getTiposolicitud().getId() == 1){
+                Query aa = session.createQuery("from Matrizcontrolacceso m, Estadosolicitud e\n" +
+                                                            "WHERE m.idEstadoSolicitud = e.id\n" +
+                                                            "AND e.nombre = 'Activo'\n" +
+                                                            "AND m.idUsuario = " + s.getSolicitante());
+                List<Matrizcontrolacceso> accesos_activos = aa.list();
+                int mcaLen = accesos_activos.size();  
+                if(mcaLen > 0){
+                    //Tiene permisos ya asignados, hay que evaluar cuales se mantienen, cuales se agregan 
+                    // y cuales se eliminan
+                }
+                else{
+                    //No tiene permisos activos, asi que se le agregan todos los que solicito
+                }
+                /*
                 Query q = session.createQuery("from Posicionfuncional");
                 List<Posicionfuncional> lista = q.list();
                 int len = lista.size();  
                 for (int i = 0; i < len; i++) {
-                    Matrizcontrolacceso mca = new Matrizcontrolacceso();
-                    
+                    Matrizcontrolacceso mca = new Matrizcontrolacceso(); 
                 }
-                
+                */
+            }
+            else{
+                //Es una solicitud de remocion de accesos, hay que quitar todos los que tenga activo
             }
             tx = session.beginTransaction();
             session.save(s);

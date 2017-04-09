@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1
+// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,34 +13,31 @@ public class Posicionfuncional  implements java.io.Serializable {
 
 
      private Integer id;
-     private Estado estado;
      private Unidadorganizacional unidadorganizacional;
      private String nombre;
      private Date fechaCreacion;
      private String creadoPor;
+     private boolean estado;
      private Set solicituds = new HashSet(0);
      private Set posicionfuncionalperfils = new HashSet(0);
 
     public Posicionfuncional() {
     }
 
-    public Posicionfuncional(Integer id) {
-        this.id = id;
-    }
 	
-    public Posicionfuncional(Estado estado, Unidadorganizacional unidadorganizacional, String nombre, Date fechaCreacion, String creadoPor) {
-        this.estado = estado;
+    public Posicionfuncional(Unidadorganizacional unidadorganizacional, String nombre, Date fechaCreacion, String creadoPor, boolean estado) {
         this.unidadorganizacional = unidadorganizacional;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.creadoPor = creadoPor;
+        this.estado = estado;
     }
-    public Posicionfuncional(Estado estado, Unidadorganizacional unidadorganizacional, String nombre, Date fechaCreacion, String creadoPor, Set solicituds, Set posicionfuncionalperfils) {
-       this.estado = estado;
+    public Posicionfuncional(Unidadorganizacional unidadorganizacional, String nombre, Date fechaCreacion, String creadoPor, boolean estado, Set solicituds, Set posicionfuncionalperfils) {
        this.unidadorganizacional = unidadorganizacional;
        this.nombre = nombre;
        this.fechaCreacion = fechaCreacion;
        this.creadoPor = creadoPor;
+       this.estado = estado;
        this.solicituds = solicituds;
        this.posicionfuncionalperfils = posicionfuncionalperfils;
     }
@@ -51,13 +48,6 @@ public class Posicionfuncional  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
-    }
-    public Estado getEstado() {
-        return this.estado;
-    }
-    
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
     public Unidadorganizacional getUnidadorganizacional() {
         return this.unidadorganizacional;
@@ -86,6 +76,13 @@ public class Posicionfuncional  implements java.io.Serializable {
     
     public void setCreadoPor(String creadoPor) {
         this.creadoPor = creadoPor;
+    }
+    public boolean isEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     public Set getSolicituds() {
         return this.solicituds;

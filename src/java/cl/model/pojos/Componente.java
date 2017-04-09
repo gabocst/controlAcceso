@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1
+// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,32 +13,29 @@ public class Componente  implements java.io.Serializable {
 
 
      private Integer id;
-     private Estado estado;
      private String nombre;
      private Date fechaCreacion;
      private String creadoPor;
      private String descripcion;
+     private boolean estado;
      private Set perfils = new HashSet(0);
 
     public Componente() {
     }
-    
-    public Componente(Integer id) {
-        this.id = id;
-    }
+
 	
-    public Componente(Estado estado, String nombre, Date fechaCreacion, String creadoPor) {
-        this.estado = estado;
+    public Componente(String nombre, Date fechaCreacion, String creadoPor, boolean estado) {
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.creadoPor = creadoPor;
+        this.estado = estado;
     }
-    public Componente(Estado estado, String nombre, Date fechaCreacion, String creadoPor, String descripcion, Set perfils) {
-       this.estado = estado;
+    public Componente(String nombre, Date fechaCreacion, String creadoPor, String descripcion, boolean estado, Set perfils) {
        this.nombre = nombre;
        this.fechaCreacion = fechaCreacion;
        this.creadoPor = creadoPor;
        this.descripcion = descripcion;
+       this.estado = estado;
        this.perfils = perfils;
     }
    
@@ -48,13 +45,6 @@ public class Componente  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
-    }
-    public Estado getEstado() {
-        return this.estado;
-    }
-    
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
     public String getNombre() {
         return this.nombre;
@@ -83,6 +73,13 @@ public class Componente  implements java.io.Serializable {
     
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    public boolean isEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     public Set getPerfils() {
         return this.perfils;

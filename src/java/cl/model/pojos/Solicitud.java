@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:20:50 AM by Hibernate Tools 4.3.1
+// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,15 +13,15 @@ public class Solicitud  implements java.io.Serializable {
 
 
      private Integer id;
-     private Estadosolicitud estadosolicitud;
      private Posicionfuncional posicionfuncional;
      private Tiposolicitud tiposolicitud;
-     private String solicitante;
+     private int idSolicitante;
      private Date fechaCreacion;
      private String razon;
      private String observacionAprobador;
      private String observacionAdministrador;
      private String observacionVerificador;
+     private String estadoSolicitud;
      private Integer idIntermediario;
      private Set matrizcontrolaccesos = new HashSet(0);
 
@@ -29,23 +29,23 @@ public class Solicitud  implements java.io.Serializable {
     }
 
 	
-    public Solicitud(Estadosolicitud estadosolicitud, Posicionfuncional posicionfuncional, Tiposolicitud tiposolicitud, String solicitante, Date fechaCreacion) {
-        this.estadosolicitud = estadosolicitud;
+    public Solicitud(Posicionfuncional posicionfuncional, Tiposolicitud tiposolicitud, int idSolicitante, Date fechaCreacion, String estadoSolicitud) {
         this.posicionfuncional = posicionfuncional;
         this.tiposolicitud = tiposolicitud;
-        this.solicitante = solicitante;
+        this.idSolicitante = idSolicitante;
         this.fechaCreacion = fechaCreacion;
+        this.estadoSolicitud = estadoSolicitud;
     }
-    public Solicitud(Estadosolicitud estadosolicitud, Posicionfuncional posicionfuncional, Tiposolicitud tiposolicitud, String solicitante, Date fechaCreacion, String razon, String observacionAprobador, String observacionAdministrador, String observacionVerificador, Integer idIntermediario, Set matrizcontrolaccesos) {
-       this.estadosolicitud = estadosolicitud;
+    public Solicitud(Posicionfuncional posicionfuncional, Tiposolicitud tiposolicitud, int idSolicitante, Date fechaCreacion, String razon, String observacionAprobador, String observacionAdministrador, String observacionVerificador, String estadoSolicitud, Integer idIntermediario, Set matrizcontrolaccesos) {
        this.posicionfuncional = posicionfuncional;
        this.tiposolicitud = tiposolicitud;
-       this.solicitante = solicitante;
+       this.idSolicitante = idSolicitante;
        this.fechaCreacion = fechaCreacion;
        this.razon = razon;
        this.observacionAprobador = observacionAprobador;
        this.observacionAdministrador = observacionAdministrador;
        this.observacionVerificador = observacionVerificador;
+       this.estadoSolicitud = estadoSolicitud;
        this.idIntermediario = idIntermediario;
        this.matrizcontrolaccesos = matrizcontrolaccesos;
     }
@@ -56,13 +56,6 @@ public class Solicitud  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
-    }
-    public Estadosolicitud getEstadosolicitud() {
-        return this.estadosolicitud;
-    }
-    
-    public void setEstadosolicitud(Estadosolicitud estadosolicitud) {
-        this.estadosolicitud = estadosolicitud;
     }
     public Posicionfuncional getPosicionfuncional() {
         return this.posicionfuncional;
@@ -78,12 +71,12 @@ public class Solicitud  implements java.io.Serializable {
     public void setTiposolicitud(Tiposolicitud tiposolicitud) {
         this.tiposolicitud = tiposolicitud;
     }
-    public String getSolicitante() {
-        return this.solicitante;
+    public int getIdSolicitante() {
+        return this.idSolicitante;
     }
     
-    public void setSolicitante(String solicitante) {
-        this.solicitante = solicitante;
+    public void setIdSolicitante(int idSolicitante) {
+        this.idSolicitante = idSolicitante;
     }
     public Date getFechaCreacion() {
         return this.fechaCreacion;
@@ -119,6 +112,13 @@ public class Solicitud  implements java.io.Serializable {
     
     public void setObservacionVerificador(String observacionVerificador) {
         this.observacionVerificador = observacionVerificador;
+    }
+    public String getEstadoSolicitud() {
+        return this.estadoSolicitud;
+    }
+    
+    public void setEstadoSolicitud(String estadoSolicitud) {
+        this.estadoSolicitud = estadoSolicitud;
     }
     public Integer getIdIntermediario() {
         return this.idIntermediario;

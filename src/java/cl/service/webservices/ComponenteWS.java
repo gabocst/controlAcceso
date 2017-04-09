@@ -31,12 +31,11 @@ public class ComponenteWS {
      * Web service operation
      */
     @WebMethod(operationName = "crearComponente")
-    public String crearComponente(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "idEstado") int idEstado) {
+    public String crearComponente(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "idEstado") boolean estado) {
 
         Date date = new Date();
 
-        Estado e = new Estado(idEstado);
-        Componente c = new Componente(e, nombre, date, creadoPor, descripcion, null);
+        Componente c = new Componente(nombre, date, creadoPor, descripcion, estado, null);
         ComponenteDAO componenteDAO = new ComponenteDAO();
         return componenteDAO.crearComponete(c);
     }
@@ -72,13 +71,12 @@ public class ComponenteWS {
      * Web service operation
      */
     @WebMethod(operationName = "actualizarComponente")
-    public String actualizarComponente(@WebParam(name = "id") Integer id, @WebParam(name = "nombre") String nombre, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "idEstado") Integer idEstado) {
-        Estado e = new Estado(idEstado, "Activo");
+    public String actualizarComponente(@WebParam(name = "id") Integer id, @WebParam(name = "nombre") String nombre, @WebParam(name = "descripcion") String descripcion, @WebParam(name = "idEstado") boolean estado) {
         ComponenteDAO componenteDAO = new ComponenteDAO();
         Componente c = componenteDAO.leerComponente(id);
         c.setDescripcion(descripcion);
         c.setNombre(nombre);
-        c.setEstado(e);
+        c.setEstado(estado);
         return componenteDAO.actualizarComponete(c);
     }
 
@@ -90,5 +88,6 @@ public class ComponenteWS {
         ComponenteDAO componenteDAO = new ComponenteDAO();
         return componenteDAO.cambiarStatusComponete(id);
     }
+
 
 }
