@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 8, 2017 9:54:34 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cl.model.pojos.Solicitud" table="solicitud" catalog="controlacceso" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="estadosolicitud" class="cl.model.pojos.Estadosolicitud" fetch="select">
+            <column name="idEstadoSolicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="posicionfuncional" class="cl.model.pojos.Posicionfuncional" fetch="select">
+            <column name="idPosicionFuncional" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tiposolicitud" class="cl.model.pojos.Tiposolicitud" fetch="select">
+            <column name="idTipoSolicitud" not-null="true" />
+        </many-to-one>
+        <property name="solicitante" type="string">
+            <column name="solicitante" length="100" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fechaCreacion" length="19" not-null="true" />
+        </property>
+        <property name="razon" type="string">
+            <column name="razon" length="500" />
+        </property>
+        <property name="observacionAprobador" type="string">
+            <column name="observacionAprobador" length="500" />
+        </property>
+        <property name="observacionAdministrador" type="string">
+            <column name="observacionAdministrador" length="500" />
+        </property>
+        <property name="observacionVerificador" type="string">
+            <column name="observacionVerificador" length="500" />
+        </property>
+        <set name="matrizcontrolaccesos" table="matrizcontrolacceso" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idSolicitud" not-null="true" />
+            </key>
+            <one-to-many class="cl.model.pojos.Matrizcontrolacceso" />
+        </set>
+    </class>
+</hibernate-mapping>
