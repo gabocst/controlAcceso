@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 8, 2017 9:54:34 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="cl.model.pojos.Matrizcontrolacceso" table="matrizcontrolacceso" catalog="controlacceso" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="estadosolicitud" class="cl.model.pojos.Estadosolicitud" fetch="select">
+            <column name="idEstadoSolicitud" not-null="true" />
+        </many-to-one>
+        <many-to-one name="perfil" class="cl.model.pojos.Perfil" fetch="select">
+            <column name="idPerfil" not-null="true" />
+        </many-to-one>
+        <many-to-one name="solicitud" class="cl.model.pojos.Solicitud" fetch="select">
+            <column name="idSolicitud" not-null="true" />
+        </many-to-one>
+        <property name="accion" type="string">
+            <column name="accion" length="20" not-null="true" />
+        </property>
+        <property name="idEjecutor" type="java.lang.Integer">
+            <column name="idEjecutor" />
+        </property>
+    </class>
+</hibernate-mapping>

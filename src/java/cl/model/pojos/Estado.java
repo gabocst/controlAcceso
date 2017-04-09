@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated 03-abr-2017 15:49:09 by Hibernate Tools 4.3.1
+// Generated Apr 8, 2017 9:54:33 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,6 +14,7 @@ public class Estado  implements java.io.Serializable {
      private int id;
      private String nombre;
      private String descripcion;
+     private Set posicionfuncionalperfils = new HashSet(0);
      private Set componentes = new HashSet(0);
      private Set unidadorganizacionals = new HashSet(0);
      private Set posicionfuncionals = new HashSet(0);
@@ -27,15 +28,11 @@ public class Estado  implements java.io.Serializable {
         this.id = id;
         this.nombre = nombre;
     }
-    
-    public Estado(int id) {
-        this.id = id;
-    }
-    
-    public Estado(int id, String nombre, String descripcion, Set componentes, Set unidadorganizacionals, Set posicionfuncionals, Set perfils) {
+    public Estado(int id, String nombre, String descripcion, Set posicionfuncionalperfils, Set componentes, Set unidadorganizacionals, Set posicionfuncionals, Set perfils) {
        this.id = id;
        this.nombre = nombre;
        this.descripcion = descripcion;
+       this.posicionfuncionalperfils = posicionfuncionalperfils;
        this.componentes = componentes;
        this.unidadorganizacionals = unidadorganizacionals;
        this.posicionfuncionals = posicionfuncionals;
@@ -62,6 +59,13 @@ public class Estado  implements java.io.Serializable {
     
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    public Set getPosicionfuncionalperfils() {
+        return this.posicionfuncionalperfils;
+    }
+    
+    public void setPosicionfuncionalperfils(Set posicionfuncionalperfils) {
+        this.posicionfuncionalperfils = posicionfuncionalperfils;
     }
     public Set getComponentes() {
         return this.componentes;

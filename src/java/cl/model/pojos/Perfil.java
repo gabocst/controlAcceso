@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated 03-abr-2017 15:49:09 by Hibernate Tools 4.3.1
+// Generated Apr 8, 2017 9:54:33 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -18,13 +18,10 @@ public class Perfil  implements java.io.Serializable {
      private String nombre;
      private Date fechaCreacion;
      private String creadoPor;
+     private Set matrizcontrolaccesos = new HashSet(0);
      private Set posicionfuncionalperfils = new HashSet(0);
 
     public Perfil() {
-    }
-    
-    public Perfil(Integer id) {
-        this.id = id;
     }
 
 	
@@ -35,12 +32,13 @@ public class Perfil  implements java.io.Serializable {
         this.fechaCreacion = fechaCreacion;
         this.creadoPor = creadoPor;
     }
-    public Perfil(Componente componente, Estado estado, String nombre, Date fechaCreacion, String creadoPor, Set posicionfuncionalperfils) {
+    public Perfil(Componente componente, Estado estado, String nombre, Date fechaCreacion, String creadoPor, Set matrizcontrolaccesos, Set posicionfuncionalperfils) {
        this.componente = componente;
        this.estado = estado;
        this.nombre = nombre;
        this.fechaCreacion = fechaCreacion;
        this.creadoPor = creadoPor;
+       this.matrizcontrolaccesos = matrizcontrolaccesos;
        this.posicionfuncionalperfils = posicionfuncionalperfils;
     }
    
@@ -85,6 +83,13 @@ public class Perfil  implements java.io.Serializable {
     
     public void setCreadoPor(String creadoPor) {
         this.creadoPor = creadoPor;
+    }
+    public Set getMatrizcontrolaccesos() {
+        return this.matrizcontrolaccesos;
+    }
+    
+    public void setMatrizcontrolaccesos(Set matrizcontrolaccesos) {
+        this.matrizcontrolaccesos = matrizcontrolaccesos;
     }
     public Set getPosicionfuncionalperfils() {
         return this.posicionfuncionalperfils;

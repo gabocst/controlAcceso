@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated 03-abr-2017 15:49:09 by Hibernate Tools 4.3.1
+// Generated Apr 8, 2017 9:54:33 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -10,39 +10,37 @@ import java.util.Date;
 public class Posicionfuncionalperfil  implements java.io.Serializable {
 
 
-     private PosicionfuncionalperfilId id;
+     private Integer id;
+     private Estado estado;
      private Perfil perfil;
      private Posicionfuncional posicionfuncional;
      private Date fechaCreacion;
      private String creadoPor;
-     private Estado estado;
 
     public Posicionfuncionalperfil() {
     }
-    
-    public Posicionfuncionalperfil(Estado estado, Perfil perfil, Posicionfuncional posicionfuncional, Date fechaCreacion, String creadoPor) {
-       this.perfil = perfil;
-       this.posicionfuncional = posicionfuncional;
-       this.fechaCreacion = fechaCreacion;
-       this.creadoPor = creadoPor;
-       this.estado = estado;
-    }
 
-    public Posicionfuncionalperfil(Estado estado, PosicionfuncionalperfilId id, Perfil perfil, Posicionfuncional posicionfuncional, Date fechaCreacion, String creadoPor) {
-       this.id = id;
+    public Posicionfuncionalperfil(Estado estado, Perfil perfil, Posicionfuncional posicionfuncional, Date fechaCreacion, String creadoPor) {
+       this.estado = estado;
        this.perfil = perfil;
        this.posicionfuncional = posicionfuncional;
        this.fechaCreacion = fechaCreacion;
        this.creadoPor = creadoPor;
-       this.estado = estado;
     }
    
-    public PosicionfuncionalperfilId getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(PosicionfuncionalperfilId id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+    public Estado getEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
     public Perfil getPerfil() {
         return this.perfil;
@@ -71,20 +69,6 @@ public class Posicionfuncionalperfil  implements java.io.Serializable {
     
     public void setCreadoPor(String creadoPor) {
         this.creadoPor = creadoPor;
-    }
-
-    /**
-     * @return the estado
-     */
-    public Estado getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
 
 

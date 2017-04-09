@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated 03-abr-2017 15:49:09 by Hibernate Tools 4.3.1
+// Generated Apr 8, 2017 9:54:33 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,6 +15,7 @@ public class Estadosolicitud  implements java.io.Serializable {
      private String nombre;
      private String descripcion;
      private Set solicituds = new HashSet(0);
+     private Set matrizcontrolaccesos = new HashSet(0);
 
     public Estadosolicitud() {
     }
@@ -23,10 +24,11 @@ public class Estadosolicitud  implements java.io.Serializable {
     public Estadosolicitud(String nombre) {
         this.nombre = nombre;
     }
-    public Estadosolicitud(String nombre, String descripcion, Set solicituds) {
+    public Estadosolicitud(String nombre, String descripcion, Set solicituds, Set matrizcontrolaccesos) {
        this.nombre = nombre;
        this.descripcion = descripcion;
        this.solicituds = solicituds;
+       this.matrizcontrolaccesos = matrizcontrolaccesos;
     }
    
     public Integer getId() {
@@ -56,6 +58,13 @@ public class Estadosolicitud  implements java.io.Serializable {
     
     public void setSolicituds(Set solicituds) {
         this.solicituds = solicituds;
+    }
+    public Set getMatrizcontrolaccesos() {
+        return this.matrizcontrolaccesos;
+    }
+    
+    public void setMatrizcontrolaccesos(Set matrizcontrolaccesos) {
+        this.matrizcontrolaccesos = matrizcontrolaccesos;
     }
 
 

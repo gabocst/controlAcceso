@@ -49,14 +49,15 @@ Contributor(s):
     <property name="hibernate.show_sql">true</property>
     <property name="hbm2ddl.auto">update</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="cl/model/pojos/Solicitud.hbm.xml"/>
-    <mapping resource="cl/model/pojos/Componente.hbm.xml"/>
     <mapping resource="cl/model/pojos/Estadosolicitud.hbm.xml"/>
     <mapping resource="cl/model/pojos/Estado.hbm.xml"/>
-    <mapping resource="cl/model/pojos/Unidadorganizacional.hbm.xml"/>
-    <mapping resource="cl/model/pojos/Posicionfuncionalperfil.hbm.xml"/>
-    <mapping resource="cl/model/pojos/Perfil.hbm.xml"/>
-    <mapping resource="cl/model/pojos/Posicionfuncional.hbm.xml"/>
     <mapping resource="cl/model/pojos/Tiposolicitud.hbm.xml"/>
+    <mapping resource="cl/model/pojos/Matrizcontrolacceso.hbm.xml"/>
+    <mapping resource="cl/model/pojos/Unidadorganizacional.hbm.xml"/>
+    <mapping resource="cl/model/pojos/Posicionfuncional.hbm.xml"/>
+    <mapping resource="cl/model/pojos/Componente.hbm.xml"/>
+    <mapping resource="cl/model/pojos/Posicionfuncionalperfil.hbm.xml"/>
+    <mapping resource="cl/model/pojos/Solicitud.hbm.xml"/>
+    <mapping resource="cl/model/pojos/Perfil.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
