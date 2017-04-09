@@ -12,3 +12,6 @@
 hs_err_pid*
 
 build/
+
+src/java/hibernate.cfg
+/dist/
