@@ -6,7 +6,6 @@
 package cl.model.dao;
 
 import cl.model.dto.PosicionFuncionalDTO;
-import cl.model.pojos.Estado;
 import cl.model.pojos.Posicionfuncional;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,8 +75,6 @@ public class PosicionFuncionalDAO {
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
             Posicionfuncional pf = (Posicionfuncional)session.get(Posicionfuncional.class, p.getId());
-            pf.setNombre(p.getNombre());
-            pf.setEstado(p.getEstado());
             tx = session.beginTransaction();
             session.update(pf);
             tx.commit();   
@@ -99,14 +96,7 @@ public class PosicionFuncionalDAO {
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
             Posicionfuncional pos = (Posicionfuncional)session.get(Posicionfuncional.class, id);
-            Estado e = new Estado();
-            if(pos.getEstado().getNombre().equals("Activo")){
-                e.setId(0);
-            }
-            else{
-                e.setId(1);
-            }
-            pos.setEstado(e);
+            pos.setEstado(!pos.isEstado());
             tx = session.beginTransaction();
             session.update(pos);
             tx.commit();   

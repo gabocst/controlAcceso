@@ -93,6 +93,20 @@ public class PosicionFuncionalDTO {
     }
 
     /**
+     * @return the idEstado
+     */
+    public boolean isEstado() {
+        return estado;
+    }
+
+    /**
+     * @param idEstado the idEstado to set
+     */
+    public void setIdEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    /**
      * @return the idUnidadorganizacional
      */
     public Integer getIdUnidadorganizacional() {

@@ -7,7 +7,6 @@ package cl.service.webservices;
 
 import cl.model.dao.UnidadOrganizacionalDAO;
 import cl.model.dto.UnidadOrganizacionalDTO;
-import cl.model.pojos.Estado;
 import cl.model.pojos.Unidadorganizacional;
 import java.util.Date;
 import java.util.List;
@@ -28,11 +27,10 @@ public class UnidadOrganizacionalWS {
      * Web service operation
      */
     @WebMethod(operationName = "crearUnidadOrganizacional")
-    public String crearUnidadOrganizacional(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "idEstado") Integer idEstado) {
+    public String crearUnidadOrganizacional(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "estad") boolean estado) {
         Date date = new Date();
 
-        Estado e = new Estado(idEstado);
-        Unidadorganizacional u = new Unidadorganizacional(e, nombre, date, creadoPor);
+        Unidadorganizacional u = new Unidadorganizacional(nombre, date, creadoPor, estado);
         UnidadOrganizacionalDAO unidadDAO = new UnidadOrganizacionalDAO();
         return unidadDAO.crearUnidad(u);
     }
@@ -62,12 +60,11 @@ public class UnidadOrganizacionalWS {
      * Web service operation
      */
     @WebMethod(operationName = "actualizarUnidadOrganizacional")
-    public String actualizarUnidadOrganizacional(@WebParam(name = "id") int id, @WebParam(name = "nombre") String nombre, @WebParam(name = "idEstado") int idEstado) {
-        Estado e = new Estado(idEstado);
+    public String actualizarUnidadOrganizacional(@WebParam(name = "id") int id, @WebParam(name = "nombre") String nombre, @WebParam(name = "estado") boolean estado) {
         UnidadOrganizacionalDAO unidadDAO = new UnidadOrganizacionalDAO();
         Unidadorganizacional u = unidadDAO.leerUnidad(id);
         u.setNombre(nombre);
-        u.setEstado(e);
+        u.setEstado(estado);
         return unidadDAO.actualizarUnidad(u);
     }
 

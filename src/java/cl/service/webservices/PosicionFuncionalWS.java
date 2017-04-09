@@ -7,7 +7,6 @@ package cl.service.webservices;
 
 import cl.model.dao.PosicionFuncionalDAO;
 import cl.model.dto.PosicionFuncionalDTO;
-import cl.model.pojos.Estado;
 import cl.model.pojos.Posicionfuncional;
 import cl.model.pojos.Unidadorganizacional;
 import java.util.Date;
@@ -27,12 +26,11 @@ public class PosicionFuncionalWS {
      * Web service operation
      */
     @WebMethod(operationName = "crearPosicionFuncional")
-    public String crearPosicionFuncional(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "idEstado") int idEstado, @WebParam(name = "idUnidadOrganizacional") int idUnidadOrganizacional) {
+    public String crearPosicionFuncional(@WebParam(name = "nombre") String nombre, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "estado") boolean estado, @WebParam(name = "idUnidadOrganizacional") int idUnidadOrganizacional) {
         
         Date date = new Date();
         Unidadorganizacional u = new Unidadorganizacional(idUnidadOrganizacional);
-        Estado e = new Estado(idEstado);
-        Posicionfuncional p = new Posicionfuncional(e, u, nombre, date, creadoPor);
+        Posicionfuncional p = new Posicionfuncional(u, nombre, date, creadoPor, estado);
         PosicionFuncionalDAO pfDAO = new PosicionFuncionalDAO();
         return pfDAO.crearPosicion(p);
         
@@ -67,13 +65,12 @@ public class PosicionFuncionalWS {
      * Web service operation
      */
     @WebMethod(operationName = "actualizarPosicionFuncional")
-    public String actualizarPosicionFuncional(@WebParam(name = "id") Integer id, @WebParam(name = "nombre") String nombre, @WebParam(name = "idEstado") Integer idEstado) {
+    public String actualizarPosicionFuncional(@WebParam(name = "id") Integer id, @WebParam(name = "nombre") String nombre, @WebParam(name = "estado") boolean estado) {
         
-        Estado e = new Estado(idEstado);
         PosicionFuncionalDAO pfDAO = new PosicionFuncionalDAO();
         Posicionfuncional p = pfDAO.leerPosicionFuncional(id);
         p.setNombre(nombre);
-        p.setEstado(e);
+        p.setEstado(estado);
         return pfDAO.actualizarPosicion(p);
         
     }

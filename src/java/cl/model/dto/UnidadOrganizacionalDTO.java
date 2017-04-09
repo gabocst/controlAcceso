@@ -5,7 +5,6 @@
  */
 package cl.model.dto;
 
-import cl.model.pojos.Estado;
 import cl.model.pojos.Unidadorganizacional;
 import java.util.Date;
 
@@ -18,28 +17,26 @@ public class UnidadOrganizacionalDTO {
     private String nombre;
     private Date fechaCreacion;
     private String creadoPor;
-    private String estado;
-    private Integer idEstado;
+    private boolean estado;
     
     public UnidadOrganizacionalDTO() {
     }
 
 	
-    public UnidadOrganizacionalDTO(Integer id, String nombre, Date fechaCreacion, String creadoPor, String estado, Integer idEstado) {
+    public UnidadOrganizacionalDTO(Integer id, String nombre, Date fechaCreacion, String creadoPor, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
         this.creadoPor = creadoPor;
         this.estado = estado;
-        this.idEstado = idEstado;
     }
+    
     public UnidadOrganizacionalDTO(Unidadorganizacional u) {
         this.id = u.getId();
         this.nombre = u.getNombre();
         this.fechaCreacion = u.getFechaCreacion();
         this.creadoPor = u.getCreadoPor();
-        this.estado = u.getEstado().getNombre();
-        this.idEstado = u.getEstado().getId();
+        this.estado = u.isEstado();
     }
 
     /**
@@ -101,28 +98,15 @@ public class UnidadOrganizacionalDTO {
     /**
      * @return the estado
      */
-    public String getEstado() {
+    public boolean isEstado() {
         return estado;
     }
 
     /**
      * @param estado the estado to set
      */
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
-    /**
-     * @return the idEstado
-     */
-    public Integer getIdEstado() {
-        return idEstado;
-    }
-
-    /**
-     * @param idEstado the idEstado to set
-     */
-    public void setIdEstado(Integer idEstado) {
-        this.idEstado = idEstado;
-    }
 }

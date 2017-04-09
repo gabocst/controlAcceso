@@ -6,7 +6,6 @@
 package cl.model.dao;
 
 import cl.model.dto.UnidadOrganizacionalDTO;
-import cl.model.pojos.Estado;
 import cl.model.pojos.Unidadorganizacional;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +80,6 @@ public class UnidadOrganizacionalDAO {
             session = sf.openSession();
             Unidadorganizacional unidad = (Unidadorganizacional)session.get(Unidadorganizacional.class, u.getId());
             unidad.setNombre(u.getNombre());
-            unidad.setEstado(u.getEstado());
             tx = session.beginTransaction();
             session.update(unidad);
             tx.commit();   
@@ -103,14 +101,7 @@ public class UnidadOrganizacionalDAO {
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
             Unidadorganizacional unidad = (Unidadorganizacional)session.get(Unidadorganizacional.class, id);
-            Estado e = new Estado();
-            if(unidad.getEstado().getNombre().equals("Activo")){
-                e.setId(0);
-            }
-            else{
-                e.setId(1);
-            }
-            unidad.setEstado(e);
+            unidad.setEstado(!unidad.isEstado());
             tx = session.beginTransaction();
             session.update(unidad);
             tx.commit();   
