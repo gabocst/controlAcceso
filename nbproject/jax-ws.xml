@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
+  <services>
+    <service name="ComponenteWS">
+      <implementation-class>cl.service.webservices.ComponenteWS</implementation-class>
+    </service>
+    <service name="UnidadOrganizacionalWS">
+      <implementation-class>cl.service.webservices.UnidadOrganizacionalWS</implementation-class>
+    </service>
+    <service name="PerfilWS">
+      <implementation-class>cl.service.webservices.PerfilWS</implementation-class>
+    </service>
+    <service name="PosicionFuncionalWS">
+      <implementation-class>cl.service.webservices.PosicionFuncionalWS</implementation-class>
+    </service>
+    <service name="PosicicionFuncionalPerfilWS">
+      <implementation-class>cl.service.webservices.PosicicionFuncionalPerfilWS</implementation-class>
+    </service>
+  </services>
+  <clients/>
+</jax-ws>
