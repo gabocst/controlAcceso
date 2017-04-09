@@ -23,7 +23,10 @@ public class Perfil  implements java.io.Serializable {
 
     public Perfil() {
     }
-
+    
+    public Perfil(Integer id) {
+        this.id = id;
+    }
 	
     public Perfil(Componente componente, Estado estado, String nombre, Date fechaCreacion, String creadoPor) {
         this.componente = componente;

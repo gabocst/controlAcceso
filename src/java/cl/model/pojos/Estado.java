@@ -22,6 +22,10 @@ public class Estado  implements java.io.Serializable {
 
     public Estado() {
     }
+    
+    public Estado(int id) {
+        this.id = id;
+    }
 
 	
     public Estado(int id, String nombre) {

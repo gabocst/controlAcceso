@@ -23,7 +23,10 @@ public class Posicionfuncional  implements java.io.Serializable {
 
     public Posicionfuncional() {
     }
-
+    
+    public Posicionfuncional(Integer id) {
+        this.id = id;
+    }
 	
     public Posicionfuncional(Estado estado, Unidadorganizacional unidadorganizacional, String nombre, Date fechaCreacion, String creadoPor) {
         this.estado = estado;

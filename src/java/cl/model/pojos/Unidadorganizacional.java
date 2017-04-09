@@ -21,7 +21,10 @@ public class Unidadorganizacional  implements java.io.Serializable {
 
     public Unidadorganizacional() {
     }
-
+    
+    public Unidadorganizacional(Integer id) {
+        this.id = id;
+    }
 	
     public Unidadorganizacional(Estado estado, String nombre, Date fechaCreacion, String creadoPor) {
         this.estado = estado;
