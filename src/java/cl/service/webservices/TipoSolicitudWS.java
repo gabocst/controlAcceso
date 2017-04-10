@@ -5,24 +5,26 @@
  */
 package cl.service.webservices;
 
-import cl.model.dao.ResponseClass;
+import cl.model.dao.TipoSolicitudDAO;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
+import javax.xml.ws.BindingType;
+import org.json.JSONObject;
 
 /**
  *
  * @author Twins
  */
 @WebService(serviceName = "TipoSolicitudWS")
+@BindingType(value = "http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
 public class TipoSolicitudWS {
 
     /**
      * Web service operation
      */
     @WebMethod(operationName = "listarTiposSolicitud")
-    public ResponseClass listarTiposSolicitud() {
-        //TODO write your implementation code here:
-        return null;
+    public String listarTiposSolicitud() {
+        TipoSolicitudDAO tipoDAO = new TipoSolicitudDAO();
+        return tipoDAO.listaTipoSolicitud().toString();
     }
 }

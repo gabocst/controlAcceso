@@ -7,12 +7,11 @@ package cl.model.dao;
 
 import cl.model.pojos.Tiposolicitud;
 import java.util.List;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -20,18 +19,27 @@ import org.hibernate.SessionFactory;
  */
 public class TipoSolicitudDAO {
     
-    public List<Tiposolicitud> listaTipoSolicitud(){
+    public JSONObject listaTipoSolicitud(){
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
         Query q = session.createQuery("from Tiposolicitud");
         List<Tiposolicitud> lista = q.list();
         session.close();
-        ResponseClass resp = new ResponseClass(); 
-        resp.setCodigo(200);
+        JSONObject response = new JSONObject();
         
-        
-        //resp.setData((Json) data);
-        return lista;
+        response.put("codigo", 200);
+        response.put("mensaje", "OK");
+        response.put("excepcion", "");
+        JSONArray array = new JSONArray();
+        for (Tiposolicitud ts : lista)
+        {
+            JSONObject tipo = new JSONObject();
+            tipo.put("id", ts.getId());
+            tipo.put("nombre", ts.getNombre());
+            array.put(tipo);
+        }
+        response.put("listaTipoSolicitud", array);
+        return response;
     }
     
 }
