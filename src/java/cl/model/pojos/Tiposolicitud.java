@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
+// Generated 09/04/2017 08:31:55 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -23,16 +23,15 @@ public class Tiposolicitud  implements java.io.Serializable {
     public Tiposolicitud(String nombre) {
         this.nombre = nombre;
     }
-    
-    public Tiposolicitud(Integer id) {
-        this.id = id;
-    }
-    
     public Tiposolicitud(String nombre, String descripcion, Set solicituds) {
        this.nombre = nombre;
        this.descripcion = descripcion;
        this.solicituds = solicituds;
     }
+    public Tiposolicitud(int idTipoSolicitud) {
+        this.id = idTipoSolicitud;
+    }
+
    
     public Integer getId() {
         return this.id;

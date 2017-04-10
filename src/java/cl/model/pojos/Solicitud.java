@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
+// Generated 09/04/2017 08:31:55 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -49,16 +49,16 @@ public class Solicitud  implements java.io.Serializable {
        this.idIntermediario = idIntermediario;
        this.matrizcontrolaccesos = matrizcontrolaccesos;
     }
-    
-    public Solicitud(Posicionfuncional posicionfuncional, Tiposolicitud tiposolicitud, int idSolicitante, Date fechaCreacion, String razon, String estadoSolicitud, Integer idIntermediario) {
-       this.posicionfuncional = posicionfuncional;
-       this.tiposolicitud = tiposolicitud;
+    public Solicitud(Posicionfuncional pf, Tiposolicitud ts, int idSolicitante, Date date, String razon, String pendiente, int idIntermediario) {
+       this.posicionfuncional = pf;
+       this.tiposolicitud = ts;
        this.idSolicitante = idSolicitante;
-       this.fechaCreacion = fechaCreacion;
+       this.fechaCreacion = date;
        this.razon = razon;
-       this.estadoSolicitud = estadoSolicitud;
+       this.estadoSolicitud = pendiente;
        this.idIntermediario = idIntermediario;
     }
+
    
     public Integer getId() {
         return this.id;

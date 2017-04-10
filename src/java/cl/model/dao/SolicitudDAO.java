@@ -6,13 +6,12 @@
 package cl.model.dao;
 
 import cl.model.pojos.Matrizcontrolacceso;
+import cl.model.pojos.Perfil;
 import cl.model.pojos.Posicionfuncional;
 import cl.model.pojos.Posicionfuncionalperfil;
 import cl.model.pojos.Solicitud;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,19 +35,72 @@ public class SolicitudDAO {
                                                 "WHERE m.estadoSolicitud = 'Activo'\n" +
                                                 "AND m.idUsuario = " + s.getIdSolicitante());
             List<Matrizcontrolacceso> accesos_activos = aa.list();
+            List<Matrizcontrolacceso> accesos_activosClone = aa.list();
             int mcaLen = accesos_activos.size();  
             tx = session.beginTransaction();
             session.save(s);
             if(s.getTiposolicitud().getId() == 1){
                 if(mcaLen > 0){
-                    //Tiene permisos ya asignados, hay que evaluar cuales se mantienen, cuales se agregan 
-                    // y cuales se eliminan
+                    
+                    response = "No tiene accesos para remover";
+                    
+                    Posicionfuncional p = (Posicionfuncional)session.get(Posicionfuncional.class, s.getPosicionfuncional().getId());
+                    if(p != null){
+                        Iterator<Posicionfuncionalperfil> iterPeticion = p.getPosicionfuncionalperfils().iterator();
+                        while (iterPeticion.hasNext()) {
+                            Posicionfuncionalperfil pfp = new Posicionfuncionalperfil();
+                            pfp = iterPeticion.next();
+                            Perfil perfilPF = new Perfil();
+                            perfilPF = pfp.getPerfil();
+                            Matrizcontrolacceso mca = new Matrizcontrolacceso(); 
+                            Iterator<Matrizcontrolacceso> iterActivos = accesos_activos.iterator();
+                            boolean match = false;
+                            while(iterActivos.hasNext() && !match){
+                                Matrizcontrolacceso mapf = new Matrizcontrolacceso();
+                                mapf = iterActivos.next();
+                                Perfil perfilMCA = new Perfil();
+                                perfilMCA = mapf.getPerfil();
+                                if(perfilPF.getComponente().equals(perfilMCA.getComponente())){
+                                    if(perfilPF.getId() == perfilMCA.getId())
+                                    {
+                                        iterActivos.remove();
+                                        mca.setAccion("Mantener");
+                                    }
+                                    else
+                                    {
+                                        iterActivos.remove();
+                                        mca.setAccion("Modificar");
+                                    }
+                                    match = true;
+                                }
+                            }
+                            if(!match){
+                                mca.setAccion("Agregar");
+                            }
+                            mca.setEstadoSolicitud("Pendiente");
+                            mca.setIdUsuario(s.getIdSolicitante());
+                            mca.setPerfil(pfp.getPerfil());
+                            mca.setSolicitud(s);
+                            session.save(mca);
+                        }
+                        Iterator<Matrizcontrolacceso> iterActivos = accesos_activos.iterator();
+                        while(iterActivos.hasNext()){
+                            Matrizcontrolacceso mapf = new Matrizcontrolacceso();
+                            mapf = iterActivos.next();
+                            Matrizcontrolacceso mca = new Matrizcontrolacceso(); 
+                            mca.setAccion("Eliminar");
+                            mca.setEstadoSolicitud("Pendiente");
+                            mca.setIdUsuario(s.getIdSolicitante());
+                            mca.setPerfil(mapf.getPerfil());
+                            mca.setSolicitud(s);
+                            session.save(mca);
+                        }
+                    }
                 }
                 else{
                     //No tiene permisos activos, asi que se le agregan todos los que solicito
                     Posicionfuncional p = (Posicionfuncional)session.get(Posicionfuncional.class, s.getPosicionfuncional().getId());
                     if(p != null){
-                        int cantidad_perfiles = p.getPosicionfuncionalperfils().size();
 
                         Iterator<Posicionfuncionalperfil> iter = p.getPosicionfuncionalperfils().iterator();
                         while (iter.hasNext()) {

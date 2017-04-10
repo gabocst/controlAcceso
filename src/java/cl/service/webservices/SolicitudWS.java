@@ -28,6 +28,7 @@ public class SolicitudWS {
     public String generarSolicitud(@WebParam(name = "idSolicitante") int idSolicitante, @WebParam(name = "razon") String razon, @WebParam(name = "idTipoSolicitud") int idTipoSolicitud, @WebParam(name = "idPosicionFuncional") int idPosicionFuncional, @WebParam(name = "idIntermediario") int idIntermediario) {
         
         Date date = new Date();
+        
         //int idSolicitante, Date fechaCreacion, String razon, String estadoSolicitud, Integer idIntermediario
         Posicionfuncional pf = new Posicionfuncional(idPosicionFuncional);
         Tiposolicitud ts = new Tiposolicitud(idTipoSolicitud);

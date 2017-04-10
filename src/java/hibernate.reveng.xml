@@ -42,11 +42,11 @@ Contributor(s):
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="controlacceso"/>
   <table-filter match-name="unidadorganizacional"/>
-  <table-filter match-name="tiposolicitud"/>
-  <table-filter match-name="perfil"/>
-  <table-filter match-name="componente"/>
-  <table-filter match-name="solicitud"/>
-  <table-filter match-name="posicionfuncional"/>
   <table-filter match-name="matrizcontrolacceso"/>
+  <table-filter match-name="perfil"/>
+  <table-filter match-name="solicitud"/>
+  <table-filter match-name="tiposolicitud"/>
   <table-filter match-name="posicionfuncionalperfil"/>
+  <table-filter match-name="componente"/>
+  <table-filter match-name="posicionfuncional"/>
 </hibernate-reverse-engineering>
