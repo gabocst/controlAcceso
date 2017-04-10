@@ -10,6 +10,7 @@ import cl.model.pojos.Perfil;
 import cl.model.pojos.Posicionfuncional;
 import cl.model.pojos.Posicionfuncionalperfil;
 import cl.model.pojos.Solicitud;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
@@ -142,6 +143,203 @@ public class SolicitudDAO {
             throw new RuntimeException("No se pudo crear la solicitud");
         }
         session.close();
+        return response;
+    }
+    
+    public String AprobarSolicitud(int idSolicitud, int idUsuario, String observacion){
+        SessionFactory sf;
+        Session session;
+        Transaction tx = null;
+        String response;
+        try{
+            sf = HibernateUtil.getSessionFactory();
+            session = sf.openSession();
+            
+            Date date = new Date();
+            
+            Solicitud solicitud = (Solicitud)session.get(Solicitud.class, idSolicitud);
+            if(solicitud != null)
+            {
+                if(solicitud.getEstadoSolicitud().equals("Pendiente"))
+                {
+                    solicitud.setEstadoSolicitud("Aprobado");
+                    solicitud.setObservacionAprobador(observacion);
+                    tx = session.beginTransaction();
+                    Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+                    while(iterMCA.hasNext()){
+                        Matrizcontrolacceso mca = iterMCA.next();
+                        mca.setEstadoSolicitud("Aprobado");
+                        mca.setIdAprobador(idUsuario);
+                        mca.setFechaAprobacion(date);
+                        session.update(mca);
+                    }
+                    session.update(solicitud);
+                    tx.commit();   
+                    response = "Solicitud actualizada exitosamente";
+                }
+                else{
+                    response = "Solicitud inválida";
+                }
+                
+            }
+            else{
+                response = "Solicitud inválida";
+            }
+            
+        }
+        catch(Exception ex){
+            tx.rollback();
+            response = "No se pudo actualizar la solicitud";
+        }
+        return response;
+    }
+    
+    public String gestionarSolicitud(int idSolicitud, int idUsuario, String observacion){
+        SessionFactory sf;
+        Session session;
+        Transaction tx = null;
+        String response;
+        try{
+            sf = HibernateUtil.getSessionFactory();
+            session = sf.openSession();
+            
+            Date date = new Date();
+            
+            Solicitud solicitud = (Solicitud)session.get(Solicitud.class, idSolicitud);
+            if(solicitud != null)
+            {
+               if(solicitud.getEstadoSolicitud().equals("En Gestion") || solicitud.getEstadoSolicitud().equals("Devuelto"))
+                {
+                    solicitud.setEstadoSolicitud("Gestionado");
+                    solicitud.setObservacionAdministrador(observacion);
+                    tx = session.beginTransaction();
+                    session.update(solicitud);
+                    tx.commit();   
+                    response = "Solicitud actualizada exitosamente";
+                }
+                else{
+                    response = "Solicitud inválida";
+                }
+            }
+            else{
+                response = "Solicitud inválida";
+            }
+            
+        }
+        catch(Exception ex){
+            tx.rollback();
+            response = "No se pudo actualizar la solicitud";
+        }
+        return response;
+    }
+
+    public String rechazarSolicitud(int idSolicitud, int idUsuario, String observacion) {
+        SessionFactory sf;
+        Session session;
+        Transaction tx = null;
+        String response;
+        try{
+            sf = HibernateUtil.getSessionFactory();
+            session = sf.openSession();
+            
+            Date date = new Date();
+            int opcion = 0;
+            
+            Solicitud solicitud = (Solicitud)session.get(Solicitud.class, idSolicitud);
+            if(solicitud != null)
+            {
+                solicitud.setEstadoSolicitud("Rechazado");
+                tx = session.beginTransaction();
+                Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+                while(iterMCA.hasNext()){
+                    Matrizcontrolacceso mca = iterMCA.next();
+                    mca.setEstadoSolicitud("Rechazado");
+                    if(mca.getIdAprobador() == null){
+                        opcion = 1;
+                        mca.setIdAprobador(idUsuario);
+                        mca.setFechaAprobacion(date);
+                        
+                    }
+                    else if(mca.getIdGestor() == null){
+                        opcion = 2;
+                        mca.setIdGestor(idUsuario);
+                        mca.setFechaGestion(date);
+                       
+                    }
+                    else{
+                        opcion = 3;
+                        mca.setIdVerificador(idUsuario);
+                        mca.setFechaVerificacion(date);
+                    }
+                    session.update(mca);
+                }
+                if(opcion==1) solicitud.setObservacionAprobador(observacion);
+                else if(opcion==2) solicitud.setObservacionAdministrador(observacion);
+                else solicitud.setObservacionVerificador(observacion);
+                
+                session.update(solicitud);
+                tx.commit();   
+                response = "Solicitud actualizada exitosamente";
+            }
+            else{
+                response = "Solicitud inválida";
+            }
+            
+        }
+        catch(Exception ex){
+            tx.rollback();
+            response = "No se pudo actualizar la solicitud";
+        }
+        return response;
+    }
+
+    public String devolverSolicitud(int idSolicitud, int idUsuario, String observacion) {
+        SessionFactory sf;
+        Session session;
+        Transaction tx = null;
+        String response;
+        try{
+            sf = HibernateUtil.getSessionFactory();
+            session = sf.openSession();
+            
+            Date date = new Date();
+            
+            Solicitud solicitud = (Solicitud)session.get(Solicitud.class, idSolicitud);
+            if(solicitud != null)
+            {
+               if(solicitud.getEstadoSolicitud().equals("Gestionado") || solicitud.getEstadoSolicitud().equals("En Verificacion"))
+                {
+                    solicitud.setEstadoSolicitud("Devuelto");
+                    solicitud.setObservacionVerificador(observacion);
+                    tx = session.beginTransaction();
+                    Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+                    while(iterMCA.hasNext()){
+                        Matrizcontrolacceso mca = iterMCA.next();
+                        if(!mca.getEstadoSolicitud().equals("Verificado"))
+                        {
+                            mca.setEstadoSolicitud("Devuelto");
+                            mca.setIdAprobador(idUsuario);
+                            mca.setFechaAprobacion(date);
+                            session.update(mca);
+                        }
+                    }
+                    session.update(solicitud);
+                    tx.commit();   
+                    response = "Solicitud actualizada exitosamente";
+                }
+                else{
+                    response = "Solicitud inválida";
+                }
+            }
+            else{
+                response = "Solicitud inválida";
+            }
+            
+        }
+        catch(Exception ex){
+            tx.rollback();
+            response = "No se pudo actualizar la solicitud";
+        }
         return response;
     }
     

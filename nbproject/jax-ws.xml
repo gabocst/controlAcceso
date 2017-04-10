@@ -22,6 +22,9 @@
     <service name="TipoSolicitudWS">
       <implementation-class>cl.service.webservices.TipoSolicitudWS</implementation-class>
     </service>
+    <service name="MatrizControlAccesoWS">
+      <implementation-class>cl.service.webservices.MatrizControlAccesoWS</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
