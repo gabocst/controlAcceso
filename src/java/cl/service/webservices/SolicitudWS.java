@@ -74,8 +74,28 @@ public class SolicitudWS {
     @WebMethod(operationName = "devolverSolicitud")
     public String devolverSolicitud(@WebParam(name = "idSolicitud") int idSolicitud, @WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "observacion") String observacion) {
         
-         SolicitudDAO solDAO = new SolicitudDAO();
+        SolicitudDAO solDAO = new SolicitudDAO();
         return solDAO.devolverSolicitud(idSolicitud, idUsuario, observacion);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "cancelarSolicitud")
+    public String cancelarSolicitud(@WebParam(name = "idSolicitud") int idSolicitud) {
+       
+        SolicitudDAO solDAO = new SolicitudDAO();
+        return solDAO.cancelarSolicitud(idSolicitud);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "finalizarSolicitud")
+    public String finalizarSolicitud(@WebParam(name = "idSolicitud") int idSolicitud, @WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "observacion") String observacion) {
+        
+        SolicitudDAO solDAO = new SolicitudDAO();
+        return solDAO.finalizarSolicitud(idSolicitud, idUsuario, observacion);
     }
 
 }

@@ -13,6 +13,7 @@ import cl.model.pojos.Solicitud;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,14 +37,11 @@ public class SolicitudDAO {
                                                 "WHERE m.estadoSolicitud = 'Activo'\n" +
                                                 "AND m.idUsuario = " + s.getIdSolicitante());
             List<Matrizcontrolacceso> accesos_activos = aa.list();
-            List<Matrizcontrolacceso> accesos_activosClone = aa.list();
             int mcaLen = accesos_activos.size();  
             tx = session.beginTransaction();
             session.save(s);
             if(s.getTiposolicitud().getId() == 1){
                 if(mcaLen > 0){
-                    
-                    response = "No tiene accesos para remover";
                     
                     Posicionfuncional p = (Posicionfuncional)session.get(Posicionfuncional.class, s.getPosicionfuncional().getId());
                     if(p != null){
@@ -210,12 +208,23 @@ public class SolicitudDAO {
             {
                if(solicitud.getEstadoSolicitud().equals("En Gestion") || solicitud.getEstadoSolicitud().equals("Devuelto"))
                 {
-                    solicitud.setEstadoSolicitud("Gestionado");
-                    solicitud.setObservacionAdministrador(observacion);
-                    tx = session.beginTransaction();
-                    session.update(solicitud);
-                    tx.commit();   
-                    response = "Solicitud actualizada exitosamente";
+                    boolean gestionadosTodos = true;
+                    Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+                    while(iterMCA.hasNext() && gestionadosTodos){
+                        Matrizcontrolacceso mca = iterMCA.next();
+                        gestionadosTodos = mca.getEstadoSolicitud().equals("Gestionado");
+                    }
+                    if(gestionadosTodos){
+                        tx = session.beginTransaction();
+                        solicitud.setEstadoSolicitud("Gestionado");
+                        solicitud.setObservacionAdministrador(observacion);
+                        session.update(solicitud);
+                        tx.commit();   
+                        response = "Solicitud actualizada exitosamente";
+                    }
+                    else{
+                        response = "Faltan perfiles por gestionar";
+                    }
                 }
                 else{
                     response = "Solicitud inválida";
@@ -341,6 +350,154 @@ public class SolicitudDAO {
             response = "No se pudo actualizar la solicitud";
         }
         return response;
+    }
+
+    public String cancelarSolicitud(int idSolicitud) {
+        SessionFactory sf;
+        Session session;
+        Transaction tx = null;
+        String response;
+        try{
+            sf = HibernateUtil.getSessionFactory();
+            session = sf.openSession();
+            
+            Date date = new Date();
+            
+            Solicitud solicitud = (Solicitud)session.get(Solicitud.class, idSolicitud);
+            if(solicitud != null)
+            {
+                if(solicitud.getEstadoSolicitud().equals("Pendiente"))
+                {
+                    solicitud.setEstadoSolicitud("Cancelado");
+                    tx = session.beginTransaction();
+                    Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+                    while(iterMCA.hasNext()){
+                        Matrizcontrolacceso mca = iterMCA.next();
+                        mca.setEstadoSolicitud("Cancelado");
+                        session.update(mca);
+                    }
+                    session.update(solicitud);
+                    tx.commit();   
+                    response = "Solicitud actualizada exitosamente";
+                }
+                else{
+                    response = "Solicitud inválida";
+                }
+                
+            }
+            else{
+                response = "Solicitud inválida";
+            }
+            
+        }
+        catch(Exception ex){
+            tx.rollback();
+            response = "No se pudo actualizar la solicitud";
+        }
+        return response;
+    }
+
+    public String finalizarSolicitud(int idSolicitud, int idUsuario, String observacion) {
+       SessionFactory sf;
+        Session session = null;
+        Transaction tx = null;
+        String response = "";
+        try{
+            sf = HibernateUtil.getSessionFactory();
+            session = sf.openSession();
+            Date date = new Date();
+            
+            Solicitud solicitud = (Solicitud)session.get(Solicitud.class, idSolicitud);
+            Query aa = session.createQuery("from Matrizcontrolacceso m\n" +
+                                                "WHERE m.estadoSolicitud = 'Activo'\n" +
+                                                "AND m.idUsuario = " + solicitud.getIdSolicitante());
+            List<Matrizcontrolacceso> accesos_activos = aa.list();
+            int mcaLen = accesos_activos.size();  
+            tx = session.beginTransaction();
+            if(solicitud.getTiposolicitud().getId() == 1){
+                if(mcaLen > 0){
+                    Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+                    while (iterMCA.hasNext()) {
+                        Matrizcontrolacceso pfp = iterMCA.next();
+                        if(pfp.getAccion().equals("Agregar")){
+                            pfp.setEstadoSolicitud("Activo");
+                            pfp.setInicio(date);
+                            session.update(pfp);
+                        }
+                        else{
+                            Perfil perfilPF = pfp.getPerfil();
+                            Iterator<Matrizcontrolacceso> iterActivos = accesos_activos.iterator();
+                            boolean match = false;
+                            while(iterActivos.hasNext() && !match){
+                                Matrizcontrolacceso mapf = iterActivos.next();
+                                Perfil perfilMCA = mapf.getPerfil();
+                                if(perfilPF.getComponente().equals(perfilMCA.getComponente())){
+                                    if(pfp.getAccion().equals("Eliminar"))
+                                    {
+                                        pfp.setEstadoSolicitud("Eliminado");
+                                        mapf.setEstadoSolicitud("Finalizado");
+                                    }
+                                    else if(pfp.getAccion().equals("Mantener"))
+                                    {
+                                        pfp.setEstadoSolicitud("Activo");
+                                        mapf.setEstadoSolicitud("Finalizado");
+                                    }
+                                    else if(pfp.getAccion().equals("Modificar")){
+                                        pfp.setEstadoSolicitud("Activo");
+                                        mapf.setEstadoSolicitud("Eliminado");
+                                    }
+                                    pfp.setInicio(date);
+                                    mapf.setFin(date);
+                                    session.update(pfp);
+                                    session.update(mapf);
+                                    iterActivos.remove();
+                                    match = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                else{
+                    Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+                    while(iterMCA.hasNext()){
+                        Matrizcontrolacceso mca = iterMCA.next();
+                        mca.setEstadoSolicitud("Activo");
+                        mca.setInicio(date);
+                        session.update(mca);
+                    }
+                }
+            }
+            else{
+                //Es una solicitud de remocion de accesos, hay que quitar todos los que tenga activo
+                if(mcaLen > 0){
+                    Iterator<Matrizcontrolacceso> iter = accesos_activos.iterator();
+                        while (iter.hasNext()) {
+                            Matrizcontrolacceso mca = new Matrizcontrolacceso(); 
+                            mca.setEstadoSolicitud("Finalizado");
+                            mca.setFin(date);
+                            session.save(mca);
+                        }
+                }
+                Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+                while(iterMCA.hasNext()){
+                    Matrizcontrolacceso mca = iterMCA.next();
+                    mca.setEstadoSolicitud("Eliminado");
+                    mca.setInicio(date);
+                    session.update(mca);
+                }
+            }
+            solicitud.setEstadoSolicitud("Finalizado");
+            solicitud.setObservacionVerificador(observacion);
+            session.update(solicitud);
+            tx.commit();   
+            response = "Solicitud creada exitosamente";
+        }
+        catch(Exception ex){
+            tx.rollback();
+            throw new RuntimeException("No se pudo crear la solicitud");
+        }
+        session.close();
+        return response; 
     }
     
 }
