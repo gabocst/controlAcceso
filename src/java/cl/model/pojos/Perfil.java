@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
+// Generated 09/04/2017 08:31:55 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -24,9 +24,6 @@ public class Perfil  implements java.io.Serializable {
     public Perfil() {
     }
 
-    public Perfil(Integer id) {
-        this.id = id;
-    }
 	
     public Perfil(Componente componente, String nombre, Date fechaCreacion, String creadoPor, boolean estado) {
         this.componente = componente;
@@ -43,6 +40,10 @@ public class Perfil  implements java.io.Serializable {
        this.estado = estado;
        this.matrizcontrolaccesos = matrizcontrolaccesos;
        this.posicionfuncionalperfils = posicionfuncionalperfils;
+    }
+
+    public Perfil(int idPerfil) {
+        this.id = idPerfil;
     }
    
     public Integer getId() {

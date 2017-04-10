@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
+// Generated 09/04/2017 08:31:55 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,10 +21,6 @@ public class Unidadorganizacional  implements java.io.Serializable {
 
     public Unidadorganizacional() {
     }
-    
-    public Unidadorganizacional(Integer id){
-        this.id = id;
-    }
 
 	
     public Unidadorganizacional(String nombre, Date fechaCreacion, String creadoPor, boolean estado) {
@@ -40,6 +36,10 @@ public class Unidadorganizacional  implements java.io.Serializable {
        this.estado = estado;
        this.posicionfuncionals = posicionfuncionals;
     }
+    public Unidadorganizacional(int idUnidadOrganizacional) {
+        this.id = idUnidadOrganizacional;
+    }
+
    
     public Integer getId() {
         return this.id;

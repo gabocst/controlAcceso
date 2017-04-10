@@ -1,5 +1,5 @@
 package cl.model.pojos;
-// Generated Apr 9, 2017 12:49:51 PM by Hibernate Tools 4.3.1
+// Generated 09/04/2017 08:31:55 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -19,6 +19,12 @@ public class Matrizcontrolacceso  implements java.io.Serializable {
      private Integer idEjecutor;
      private String estadoSolicitud;
      private int idUsuario;
+     private Date fechaAprobacion;
+     private Integer idAprobador;
+     private Date fechaGestion;
+     private Integer idGestor;
+     private Date fechaVerificacion;
+     private Integer idVerificador;
 
     public Matrizcontrolacceso() {
     }
@@ -31,7 +37,7 @@ public class Matrizcontrolacceso  implements java.io.Serializable {
         this.estadoSolicitud = estadoSolicitud;
         this.idUsuario = idUsuario;
     }
-    public Matrizcontrolacceso(Perfil perfil, Solicitud solicitud, String accion, Date inicio, Date fin, Integer idEjecutor, String estadoSolicitud, int idUsuario) {
+    public Matrizcontrolacceso(Perfil perfil, Solicitud solicitud, String accion, Date inicio, Date fin, Integer idEjecutor, String estadoSolicitud, int idUsuario, Date fechaAprobacion, Integer idAprobador, Date fechaGestion, Integer idGestor, Date fechaVerificacion, Integer idVerificador) {
        this.perfil = perfil;
        this.solicitud = solicitud;
        this.accion = accion;
@@ -40,6 +46,12 @@ public class Matrizcontrolacceso  implements java.io.Serializable {
        this.idEjecutor = idEjecutor;
        this.estadoSolicitud = estadoSolicitud;
        this.idUsuario = idUsuario;
+       this.fechaAprobacion = fechaAprobacion;
+       this.idAprobador = idAprobador;
+       this.fechaGestion = fechaGestion;
+       this.idGestor = idGestor;
+       this.fechaVerificacion = fechaVerificacion;
+       this.idVerificador = idVerificador;
     }
    
     public Integer getId() {
@@ -104,6 +116,48 @@ public class Matrizcontrolacceso  implements java.io.Serializable {
     
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+    public Date getFechaAprobacion() {
+        return this.fechaAprobacion;
+    }
+    
+    public void setFechaAprobacion(Date fechaAprobacion) {
+        this.fechaAprobacion = fechaAprobacion;
+    }
+    public Integer getIdAprobador() {
+        return this.idAprobador;
+    }
+    
+    public void setIdAprobador(Integer idAprobador) {
+        this.idAprobador = idAprobador;
+    }
+    public Date getFechaGestion() {
+        return this.fechaGestion;
+    }
+    
+    public void setFechaGestion(Date fechaGestion) {
+        this.fechaGestion = fechaGestion;
+    }
+    public Integer getIdGestor() {
+        return this.idGestor;
+    }
+    
+    public void setIdGestor(Integer idGestor) {
+        this.idGestor = idGestor;
+    }
+    public Date getFechaVerificacion() {
+        return this.fechaVerificacion;
+    }
+    
+    public void setFechaVerificacion(Date fechaVerificacion) {
+        this.fechaVerificacion = fechaVerificacion;
+    }
+    public Integer getIdVerificador() {
+        return this.idVerificador;
+    }
+    
+    public void setIdVerificador(Integer idVerificador) {
+        this.idVerificador = idVerificador;
     }
 
 
