@@ -11,7 +11,7 @@ import javax.json.Json;
  *
  * @author Twins
  */
-public class response {
+public class ResponseClass {
     private int codigo;
     private String mensaje;
     private String excepcion;
