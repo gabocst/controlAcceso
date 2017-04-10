@@ -37,4 +37,45 @@ public class SolicitudWS {
         return solDAO.generarSolicitud(s);
         
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "aprobarSolicitud")
+    public String AprobarSolicitud(@WebParam(name = "idSolicitud") int idSolicitud, @WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "obervacion") String observacion) {
+        
+        SolicitudDAO solDAO = new SolicitudDAO();
+        return solDAO.AprobarSolicitud(idSolicitud, idUsuario, observacion);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "gestionarSolicitud")
+    public String gestionarSolicitud(@WebParam(name = "idSolicitud") int idSolicitud, @WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "observacion") String observacion) {
+        
+        SolicitudDAO solDAO = new SolicitudDAO();
+        return solDAO.gestionarSolicitud(idSolicitud, idUsuario, observacion);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "rechazarSolicitud")
+    public String rechazarSolicitud(@WebParam(name = "idSolicitud") int idSolicitud, @WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "observacion") String observacion) {
+        
+        SolicitudDAO solDAO = new SolicitudDAO();
+        return solDAO.rechazarSolicitud(idSolicitud, idUsuario, observacion);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "devolverSolicitud")
+    public String devolverSolicitud(@WebParam(name = "idSolicitud") int idSolicitud, @WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "observacion") String observacion) {
+        
+         SolicitudDAO solDAO = new SolicitudDAO();
+        return solDAO.devolverSolicitud(idSolicitud, idUsuario, observacion);
+    }
+
 }
