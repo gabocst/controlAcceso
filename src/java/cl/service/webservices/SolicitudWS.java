@@ -13,12 +13,14 @@ import java.util.Date;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.xml.ws.BindingType;
 
 /**
  *
  * @author Twins
  */
 @WebService(serviceName = "SolicitudWS")
+@BindingType(value = "http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
 public class SolicitudWS {
 
     /**
