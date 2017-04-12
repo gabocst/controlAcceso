@@ -25,11 +25,12 @@ import org.hibernate.Transaction;
  */
 public class SolicitudDAO {
     
-    public String generarSolicitud(Solicitud s){
+    public ResponseClass generarSolicitud(Solicitud s){
         SessionFactory sf;
         Session session = null;
         Transaction tx = null;
-        String response = "";
+        //String response = "";
+        ResponseClass response = new ResponseClass();
         try{
             sf = HibernateUtil.getSessionFactory();
             session = sf.openSession();
@@ -130,15 +131,22 @@ public class SolicitudDAO {
                         }
                 }
                 else{
-                    response = "No tiene accesos para remover";
+                    session.close();
+                    response.setCodigo(400);
+                    response.setMensaje("No tiene accesos para remover");
+                    return response;
                 }
             }
             tx.commit();   
-            response = "Solicitud creada exitosamente";
+            response.setCodigo(200);
+            response.setMensaje("Solicitud creada exitosamente");
+            response.setData(s.getId().toString());
         }
         catch(Exception ex){
             tx.rollback();
-            throw new RuntimeException("No se pudo crear la solicitud");
+            response.setCodigo(500);
+            response.setMensaje("No se pudo crear la solicitud");
+            response.setExcepcion(ex.getMessage());
         }
         session.close();
         return response;

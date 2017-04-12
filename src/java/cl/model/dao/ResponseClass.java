@@ -15,7 +15,7 @@ public class ResponseClass {
     private int codigo;
     private String mensaje;
     private String excepcion;
-    private Json data;
+    private String data;
 
     /**
      * @return the codigo
@@ -62,14 +62,14 @@ public class ResponseClass {
     /**
      * @return the data
      */
-    public Json getData() {
+    public String getData() {
         return data;
     }
 
     /**
      * @param data the data to set
      */
-    public void setData(Json data) {
+    public void setData(String data) {
         this.data = data;
     }
     

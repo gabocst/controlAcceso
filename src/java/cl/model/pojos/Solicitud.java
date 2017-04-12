@@ -56,7 +56,7 @@ public class Solicitud  implements java.io.Serializable {
        this.fechaCreacion = date;
        this.razon = razon;
        this.estadoSolicitud = pendiente;
-       this.idIntermediario = idIntermediario;
+       this.idIntermediario = (idIntermediario == 0) ? null : idIntermediario ;
     }
 
    

@@ -13,6 +13,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -51,20 +53,45 @@ public class PosicionFuncionalDAO {
         return null;
     }
     
-    public List<PosicionFuncionalDTO> listarPosiciones(){
+//    public List<PosicionFuncionalDTO> listarPosiciones(){
+//        SessionFactory sf = HibernateUtil.getSessionFactory();
+//        Session session = sf.openSession();
+//        Query q = session.createQuery("from Posicionfuncional");
+//        List<Posicionfuncional> lista = q.list();
+//        List<PosicionFuncionalDTO> posicionesDTO = new ArrayList<>();
+//        int len = lista.size();  
+//        for (int i = 0; i < len; i++) {
+//            PosicionFuncionalDTO pDTO = new PosicionFuncionalDTO(lista.get(i));
+//            posicionesDTO.add(pDTO);
+//        }
+//        session.close();
+//        return posicionesDTO;
+//    }
+    
+    
+    public JSONObject listarPosiciones(){
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session session = sf.openSession();
         Query q = session.createQuery("from Posicionfuncional");
         List<Posicionfuncional> lista = q.list();
-        List<PosicionFuncionalDTO> posicionesDTO = new ArrayList<>();
-        int len = lista.size();  
-        for (int i = 0; i < len; i++) {
-            PosicionFuncionalDTO pDTO = new PosicionFuncionalDTO(lista.get(i));
-            posicionesDTO.add(pDTO);
-        }
         session.close();
-        return posicionesDTO;
+        JSONObject response = new JSONObject();
+        
+        response.put("codigo", 200);
+        response.put("mensaje", "OK");
+        response.put("excepcion", "");
+        JSONArray array = new JSONArray();
+        for (Posicionfuncional ts : lista)
+        {
+            JSONObject pos = new JSONObject();
+            pos.put("id", ts.getId());
+            pos.put("nombre", ts.getNombre());
+            array.put(pos);
+        }
+        response.put("data", array);
+        return response;
     }
+    
     
     public String actualizarPosicion(Posicionfuncional p){
         SessionFactory sf;

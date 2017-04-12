@@ -14,12 +14,14 @@ import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.xml.ws.BindingType;
 
 /**
  *
  * @author Twins
  */
 @WebService(serviceName = "PosicionFuncionalWS")
+@BindingType(value = "http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
 public class PosicionFuncionalWS {
 
     /**
@@ -53,11 +55,10 @@ public class PosicionFuncionalWS {
      * Web service operation
      */
     @WebMethod(operationName = "listarPosicionesFuncionales")
-    public List<PosicionFuncionalDTO> listarPosicionesFuncionales() {
+    public String listarPosicionesFuncionales() {
         
         PosicionFuncionalDAO pfDAO = new PosicionFuncionalDAO();
-        List<PosicionFuncionalDTO> posiciones = pfDAO.listarPosiciones();
-        return posiciones;
+        return pfDAO.listarPosiciones().toString();
         
     }
 

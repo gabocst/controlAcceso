@@ -5,6 +5,7 @@
  */
 package cl.service.webservices;
 
+import cl.model.dao.ResponseClass;
 import cl.model.dao.SolicitudDAO;
 import cl.model.pojos.Posicionfuncional;
 import cl.model.pojos.Solicitud;
@@ -27,13 +28,17 @@ public class SolicitudWS {
      * Web service operation
      */
     @WebMethod(operationName = "generarSolicitud")
-    public String generarSolicitud(@WebParam(name = "idSolicitante") int idSolicitante, @WebParam(name = "razon") String razon, @WebParam(name = "idTipoSolicitud") int idTipoSolicitud, @WebParam(name = "idPosicionFuncional") int idPosicionFuncional, @WebParam(name = "idIntermediario") int idIntermediario) {
+    public ResponseClass generarSolicitud(@WebParam(name = "idSolicitante") int idSolicitante, @WebParam(name = "razon") String razon, @WebParam(name = "idTipoSolicitud") int idTipoSolicitud, @WebParam(name = "idPosicionFuncional") int idPosicionFuncional, @WebParam(name = "idIntermediario") int idIntermediario) {
         
         Date date = new Date();
-        
-        //int idSolicitante, Date fechaCreacion, String razon, String estadoSolicitud, Integer idIntermediario
-        Posicionfuncional pf = new Posicionfuncional(idPosicionFuncional);
+        Posicionfuncional pf = (idPosicionFuncional == 0) ? null : new Posicionfuncional(idPosicionFuncional);
         Tiposolicitud ts = new Tiposolicitud(idTipoSolicitud);
+        if(idIntermediario != 0)
+        {
+            int aux = idIntermediario;
+            idIntermediario = idSolicitante;
+            idSolicitante = aux;
+        }
         Solicitud s = new Solicitud(pf, ts, idSolicitante, date, razon, "Pendiente", idIntermediario);
         SolicitudDAO solDAO = new SolicitudDAO();
         return solDAO.generarSolicitud(s);
