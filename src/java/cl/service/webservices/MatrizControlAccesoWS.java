@@ -9,12 +9,14 @@ import cl.model.dao.MatrizControlAccesoDAO;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.xml.ws.BindingType;
 
 /**
  *
  * @author JOAQUIN
  */
 @WebService(serviceName = "MatrizControlAcceso")
+@BindingType(value = "http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/")
 public class MatrizControlAccesoWS {
 
     /**
@@ -35,5 +37,14 @@ public class MatrizControlAccesoWS {
         
         MatrizControlAccesoDAO macDAO = new MatrizControlAccesoDAO();
         return macDAO.matrizVerificada(idMatriz, idUsuario);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "obtenerMatrizPorSolicitud")
+    public String obtenerMatrizPorSolicitud(@WebParam(name = "idSolicitud") int idSolicitud) {
+        //TODO write your implementation code here:
+        return null;
     }
 }
