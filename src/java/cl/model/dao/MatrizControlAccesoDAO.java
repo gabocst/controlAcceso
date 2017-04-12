@@ -109,4 +109,43 @@ public class MatrizControlAccesoDAO {
         }
         return response;
     }
+
+    public JSONObject obtenerMatrizPorSolicitud(int idSolicitud) {
+        SessionFactory sf;
+        Session session;
+        Transaction tx = null;
+        sf = HibernateUtil.getSessionFactory();
+        session = sf.openSession();
+        Solicitud solicitud = (Solicitud)session.get(Solicitud.class, idSolicitud);
+        JSONObject response = new JSONObject();
+        if(solicitud != null)
+        {
+            response.put("codigo", 200);
+            response.put("mensaje", "OK");
+            response.put("excepcion", "");
+            JSONArray array = new JSONArray();
+            Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
+            while(iterMCA.hasNext()){
+                JSONObject pos = new JSONObject();
+                Matrizcontrolacceso matriz = iterMCA.next();
+                pos.put("id", matriz.getId());
+                pos.put("accion", matriz.getAccion());
+                pos.put("componente", matriz.getPerfil().getComponente().getNombre());
+                pos.put("perfil", matriz.getPerfil().getNombre());
+                pos.put("estado", matriz.getEstadoSolicitud());
+                array.put(pos);
+            }
+            response.put("data", array);
+
+        }
+        else{
+            response.put("codigo", 500);
+            response.put("mensaje", "ERROR");
+            response.put("excepcion", "Solicitud invalida");
+            JSONArray array = new JSONArray();
+            response.put("data", array);
+        }
+        session.close();
+        return response;
+    }
 }

@@ -44,7 +44,8 @@ public class MatrizControlAccesoWS {
      */
     @WebMethod(operationName = "obtenerMatrizPorSolicitud")
     public String obtenerMatrizPorSolicitud(@WebParam(name = "idSolicitud") int idSolicitud) {
-        //TODO write your implementation code here:
-        return null;
+        
+        MatrizControlAccesoDAO macDAO = new MatrizControlAccesoDAO();
+        return macDAO.obtenerMatrizPorSolicitud(idSolicitud).toString();
     }
 }
