@@ -29,7 +29,6 @@ public class SolicitudDAO {
         SessionFactory sf;
         Session session = null;
         Transaction tx = null;
-        //String response = "";
         ResponseClass response = new ResponseClass();
         try{
             sf = HibernateUtil.getSessionFactory();
@@ -40,10 +39,10 @@ public class SolicitudDAO {
             List<Matrizcontrolacceso> accesos_activos = aa.list();
             int mcaLen = accesos_activos.size();  
             tx = session.beginTransaction();
-            session.save(s);
+            
             if(s.getTiposolicitud().getId() == 1){
+                session.save(s);
                 if(mcaLen > 0){
-                    
                     Posicionfuncional p = (Posicionfuncional)session.get(Posicionfuncional.class, s.getPosicionfuncional().getId());
                     if(p != null){
                         Iterator<Posicionfuncionalperfil> iterPeticion = p.getPosicionfuncionalperfils().iterator();
@@ -120,6 +119,7 @@ public class SolicitudDAO {
             else{
                 //Es una solicitud de remocion de accesos, hay que quitar todos los que tenga activo
                 if(mcaLen > 0){
+                    session.save(s);
                     Iterator<Matrizcontrolacceso> iter = accesos_activos.iterator();
                         while (iter.hasNext()) {
                             Matrizcontrolacceso mca = new Matrizcontrolacceso(); 
