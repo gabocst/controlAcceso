@@ -127,6 +127,7 @@ public class SolicitudDAO {
                             mca.setEstadoSolicitud("Pendiente");
                             mca.setIdUsuario(s.getIdSolicitante());
                             mca.setPerfil(iter.next().getPerfil());
+                            mca.setSolicitud(s);
                             session.save(mca);
                         }
                 }
@@ -220,7 +221,7 @@ public class SolicitudDAO {
                     Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
                     while(iterMCA.hasNext() && gestionadosTodos){
                         Matrizcontrolacceso mca = iterMCA.next();
-                        gestionadosTodos = mca.getEstadoSolicitud().equals("Gestionado");
+                        gestionadosTodos = mca.getEstadoSolicitud().equals("Gestionado") || mca.getEstadoSolicitud().equals("Verificado");
                     }
                     if(gestionadosTodos){
                         tx = session.beginTransaction();
