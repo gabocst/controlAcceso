@@ -508,5 +508,15 @@ public class SolicitudDAO {
         session.close();
         return response; 
     }
+
+    public Solicitud getSolicitud(int id) {
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        Solicitud p = (Solicitud)session.get(Solicitud.class, id);
+        if(p != null){
+            return p;
+        }
+        return null;
+    }
     
 }

@@ -7,6 +7,7 @@ package cl.service.webservices;
 
 import cl.model.dao.ResponseClass;
 import cl.model.dao.SolicitudDAO;
+import cl.model.dto.SolicitudDTO;
 import cl.model.pojos.Posicionfuncional;
 import cl.model.pojos.Solicitud;
 import cl.model.pojos.Tiposolicitud;
@@ -103,6 +104,17 @@ public class SolicitudWS {
         
         SolicitudDAO solDAO = new SolicitudDAO();
         return solDAO.finalizarSolicitud(idSolicitud, idUsuario, observacion);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getSolicitud")
+    public SolicitudDTO getSolicitud(@WebParam(name = "id") int id) {
+        SolicitudDAO solDAO = new SolicitudDAO();
+        Solicitud solicitud = solDAO.getSolicitud(id);
+        SolicitudDTO solicitudDTO = new SolicitudDTO(solicitud); 
+        return solicitudDTO;
     }
 
 }
