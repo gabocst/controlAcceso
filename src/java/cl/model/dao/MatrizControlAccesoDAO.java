@@ -34,7 +34,7 @@ public class MatrizControlAccesoDAO {
             Matrizcontrolacceso matriz = (Matrizcontrolacceso)session.get(Matrizcontrolacceso.class, idMatriz);
             if(matriz != null)
             {
-                if(matriz.getEstadoSolicitud().equals("Aprobado") || matriz.getEstadoSolicitud().equals("Devuelto"))
+                if(matriz.getEstadoSolicitud().equals("Aprobado") || matriz.getEstadoSolicitud().equals("Devuelto") || matriz.getEstadoSolicitud().equals("Pendiente"))
                 {
                     tx = session.beginTransaction();
                     matriz.setEstadoSolicitud("Gestionado");

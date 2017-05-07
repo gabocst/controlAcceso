@@ -505,10 +505,10 @@ public class SolicitudDAO {
                 if(mcaLen > 0){
                     Iterator<Matrizcontrolacceso> iter = accesos_activos.iterator();
                         while (iter.hasNext()) {
-                            Matrizcontrolacceso mca = new Matrizcontrolacceso(); 
+                            Matrizcontrolacceso mca = iter.next();
                             mca.setEstadoSolicitud("Finalizado");
                             mca.setFin(date);
-                            session.save(mca);
+                            session.update(mca);
                         }
                 }
                 Iterator<Matrizcontrolacceso> iterMCA = solicitud.getMatrizcontrolaccesos().iterator();
