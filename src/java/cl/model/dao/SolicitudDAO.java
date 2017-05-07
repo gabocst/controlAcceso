@@ -10,7 +10,10 @@ import cl.model.pojos.Perfil;
 import cl.model.pojos.Posicionfuncional;
 import cl.model.pojos.Posicionfuncionalperfil;
 import cl.model.pojos.Solicitud;
+import cl.model.pojos.Tiposolicitud;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -39,11 +42,11 @@ public class SolicitudDAO {
             List<Matrizcontrolacceso> accesos_activos = aa.list();
             int mcaLen = accesos_activos.size();  
             tx = session.beginTransaction();
-            
+            Posicionfuncional p = new Posicionfuncional();
             if(s.getTiposolicitud().getId() == 1){
                 session.save(s);
                 if(mcaLen > 0){
-                    Posicionfuncional p = (Posicionfuncional)session.get(Posicionfuncional.class, s.getPosicionfuncional().getId());
+                    p = (Posicionfuncional)session.get(Posicionfuncional.class, s.getPosicionfuncional().getId());
                     if(p != null){
                         Iterator<Posicionfuncionalperfil> iterPeticion = p.getPosicionfuncionalperfils().iterator();
                         while (iterPeticion.hasNext()) {
@@ -98,7 +101,7 @@ public class SolicitudDAO {
                 }
                 else{
                     //No tiene permisos activos, asi que se le agregan todos los que solicito
-                    Posicionfuncional p = (Posicionfuncional)session.get(Posicionfuncional.class, s.getPosicionfuncional().getId());
+                    p = (Posicionfuncional)session.get(Posicionfuncional.class, s.getPosicionfuncional().getId());
                     if(p != null){
 
                         Iterator<Posicionfuncionalperfil> iter = p.getPosicionfuncionalperfils().iterator();
@@ -142,6 +145,27 @@ public class SolicitudDAO {
             response.setCodigo(200);
             response.setMensaje("Solicitud creada exitosamente");
             response.setData(s.getId().toString());
+            
+            Calendar c = new GregorianCalendar(); 
+
+            String dia, mes, annio;
+	   
+            dia = Integer.toString(c.get(Calendar.DATE));
+            mes = Integer.toString(c.get(Calendar.MONTH) + 1);
+            annio = Integer.toString(c.get(Calendar.YEAR));
+            
+            response.setFechaCreacion(dia + "/" + mes +"/" + annio);
+            if(s.getTiposolicitud().getId() == 1)
+            {
+                response.setPosicionFuncional(p.getNombre());
+            }
+            else
+            {
+                response.setPosicionFuncional("N/A");
+            }    
+            
+            Tiposolicitud ts = (Tiposolicitud)session.get(Tiposolicitud.class, s.getTiposolicitud().getId());
+            response.setTipoSolicitud(ts.getNombre());
         }
         catch(Exception ex){
             tx.rollback();

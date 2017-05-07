@@ -16,6 +16,9 @@ public class ResponseClass {
     private String mensaje;
     private String excepcion;
     private String data;
+    private String fechaCreacion;
+    private String tipoSolicitud;
+    private String posicionFuncional;
 
     /**
      * @return the codigo
@@ -71,6 +74,48 @@ public class ResponseClass {
      */
     public void setData(String data) {
         this.data = data;
+    }
+
+    /**
+     * @return the fechaCreacion
+     */
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    /**
+     * @param fechaCreacion the fechaCreacion to set
+     */
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    /**
+     * @return the tipoSolicitud
+     */
+    public String getTipoSolicitud() {
+        return tipoSolicitud;
+    }
+
+    /**
+     * @param tipoSolicitud the tipoSolicitud to set
+     */
+    public void setTipoSolicitud(String tipoSolicitud) {
+        this.tipoSolicitud = tipoSolicitud;
+    }
+
+    /**
+     * @return the posicionFuncional
+     */
+    public String getPosicionFuncional() {
+        return posicionFuncional;
+    }
+
+    /**
+     * @param posicionFuncional the posicionFuncional to set
+     */
+    public void setPosicionFuncional(String posicionFuncional) {
+        this.posicionFuncional = posicionFuncional;
     }
     
 }
